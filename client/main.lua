@@ -53,7 +53,7 @@ function drawGenericMarker(x, y, z)
             false, -- rotate
             NULL, -- texture dict
             NULL, -- texture name
-            true) -- draw on intersecting
+            false) -- draw on intersecting
 end
 
 -- intro/start of mission logic
@@ -64,7 +64,7 @@ Citizen.CreateThread(function()
         if ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'hacker' then
             drawPcMarkers()
         else
-            drawGenericMarker(Locations.RedpillMarker.x, Locations.RedpillMarker.y, Locations.RedpillMarker.z)
+            drawGenericMarker(Locations.RedpillMarker.x, Locations.RedpillMarker.y, Locations.RedpillMarker.z - 1.001)
 
             if GetDistanceBetweenCoords(Locations.RedpillMarker.x, Locations.RedpillMarker.y, Locations.RedpillMarker.z, GetEntityCoords(GetPlayerPed(-1), true)) < 5 then
                 if GetDistanceBetweenCoords(Locations.RedpillMarker.x, Locations.RedpillMarker.y, Locations.RedpillMarker.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
@@ -89,7 +89,7 @@ Citizen.CreateThread(function()
 
         if isHacking then
             drawGenericMarker(Locations.CommRoom.Exit.x, Locations.CommRoom.Exit.y, Locations.CommRoom.Exit.z - 1.0001)
-            if GetDistanceBetweenCoords(Locations.CommRoom.Exit.x, Locations.CommRoom.Exit.y, Locations.CommRoom.Exit.z, GetEntityCoords(GetPlayerPed(-1), true)) > 2 then
+            if GetDistanceBetweenCoords(Locations.CommRoom.Exit.x, Locations.CommRoom.Exit.y, Locations.CommRoom.Exit.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
                 if IsControlJustPressed(1, 38) then
                     DoScreenFadeOut(1000)
                     Citizen.Wait(500)
@@ -101,7 +101,7 @@ Citizen.CreateThread(function()
                 end
             end
 
-            if GetDistanceBetweenCoords(Locations.CommRoom.Pc.x, Locations.CommRoom.Pc.y, Locations.CommRoom.Pc.z, GetEntityCoords(GetPlayerPed(-1), true)) > 2 then
+            if GetDistanceBetweenCoords(Locations.CommRoom.Pc.x, Locations.CommRoom.Pc.y, Locations.CommRoom.Pc.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
                 drawGenericMarker(Locations.CommRoom.Pc.x, Locations.CommRoom.Pc.y, Locations.CommRoom.Pc.z - 1.001)
             else
                 if IsControlJustPressed(1, 38) then
