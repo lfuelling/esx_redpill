@@ -21,13 +21,13 @@ end)
 RegisterNUICallback('command', function(data)
     if data.command then
         SendNUIMessage({
-            action = 'terminalOut',
-            data = ExecuteRPCommand(data.command, data.machine),
+            type = 'terminalOut',
+            output = ExecuteRPCommand(data.command, data.machine),
         })
     else
         SendNUIMessage({
-            action = 'terminalOut',
-            data = { result = true, print = "" },
+            type = 'terminalOut',
+            output = { result = true, print = "" },
         })
     end
 end)

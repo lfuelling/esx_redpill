@@ -1,10 +1,11 @@
 $(function () {
+    let term;
     window.addEventListener('message', function (event) {
         if (event.data.type === "enableui") {
             document.body.style.display = event.data.enable ? "block" : "none";
 
             if (event.data.enable) {
-                let term = $('#screen').terminal(function (command, term) {
+                term = $('#screen').terminal(function (command, term) {
                     term.pause();
                     $.post('http://esx_redpill/command', {command: command, machine: event.data.machine});
                     term.resume();
@@ -12,10 +13,12 @@ $(function () {
                     greetings: 'Welcome to Redpill OS v0.1',
                     prompt: event.data.machine.user + '@' + event.data.machine.hostname + ' $ '
                 });
-
-                on("terminalOut", (data) => {
-                    term.echo(data);
-                });
+            } else {
+                term = undefined;
+            }
+        } else if(event.data.type === "terminalOut") {
+            if(term) {
+                term.echo(event.data.output);
             }
         }
     });
