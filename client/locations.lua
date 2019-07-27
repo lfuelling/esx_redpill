@@ -3,7 +3,7 @@ Locations = {
         Entry = { x = -2050.62, y = 3236.5, z = 31.5 }, -- Fort Zancudo bunker elevator
         Exit = { x = -2056.73, y = 3239.95, z = 31.5 }
     },
-    CommRoom = { x = 154.31, y = -764.62, z = 258.2, hdg = 164.48, -- IAA Building top floor comm room
+    CommRoom = { Entry = { x = 154.31, y = -764.62, z = 258.2, hdg = 164.48 }, -- IAA Building top floor comm room
                  Pc = { x = 153.25, y = -767.46, z = 258.15, -- Desk with switched on monitors in comm room
                         machine = {
                             user = "root",

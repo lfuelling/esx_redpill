@@ -96,7 +96,7 @@ Citizen.CreateThread(function()
                     Citizen.Wait(2000) -- wait for elevator doors
                     DoScreenFadeOut(1000)
                     Citizen.Wait(500)
-                    SetEntityCoords(GetPlayerPed(-1), Locations.CommRoom.x, Locations.CommRoom.y, Locations.CommRoom.z)
+                    SetEntityCoords(GetPlayerPed(-1), Locations.CommRoom.Entry.x, Locations.CommRoom.Entry.y, Locations.CommRoom.Entry.z, Locations.CommRoom.Entry.hdg)
                     DoScreenFadeIn(1000)
                     isHacking = true
                 else
