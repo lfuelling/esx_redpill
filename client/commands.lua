@@ -58,7 +58,7 @@ end
 local function __cat(machine, command)
     for _, file in ipairs(machine.files) do
         -- yes, I'm THAT cheap
-        if command == 'cat ' .. file.name then
+        if command == 'cat ' .. file.path then
             return file.content
         end
     end
