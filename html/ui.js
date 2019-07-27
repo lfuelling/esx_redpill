@@ -6,12 +6,16 @@ $(function () {
 
             if (event.data.enable) {
                 term = $('#screen').terminal(function (command, term) {
-                    term.pause();
-                    $.post('http://esx_redpill/command', JSON.stringify({
-                        command: command,
-                        machine: event.data.machine
-                    }));
-                    term.resume();
+                    if (command === "exit") {
+                        $.post('http://esx_redpill/escape', JSON.stringify({}));
+                    } else {
+                        term.pause();
+                        $.post('http://esx_redpill/command', JSON.stringify({
+                            command: command,
+                            machine: event.data.machine
+                        }));
+                        term.resume();
+                    }
                 }, {
                     greetings: 'Welcome to Redpill OS v0.1',
                     prompt: event.data.machine.user + '@' + event.data.machine.hostname + ' $ '
