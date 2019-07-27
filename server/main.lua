@@ -7,6 +7,6 @@ end)
 RegisterNetEvent('esx_phone:send')
 AddEventHandler('esx_phone:send', function(phoneNumber, message, anon, position)
     if phoneNumber == omegaContact.number then
-        TriggerClientEvent(eventNamespace .. "messageIn", source, anon, message)
+        TriggerClientEvent(eventNamespace .. omegaContact.namespace, source, anon, message)
     end
 end)
