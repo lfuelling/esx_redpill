@@ -35,7 +35,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
 
-        if ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'hacker' and not IsDead then
+        if ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'hacker' then
             drawPcMarkers()
         else
             drawGenericMarker(Locations.RedpillMarker.x, Locations.RedpillMarker.y, Locations.RedpillMarker.z)
@@ -59,7 +59,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
 
-        if ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'hacker' and not IsDead then
+        if ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'hacker' then
 
         elseif GetDistanceBetweenCoords(Locations.CommRoom.Pc.x, Locations.CommRoom.Pc.y, Locations.CommRoom.Pc.z, GetEntityCoords(GetPlayerPed(-1), true)) > 2 then
             drawGenericMarker(Locations.CommRoom.Pc.x, Locations.CommRoom.Pc.y, Locations.CommRoom.Pc.z)
