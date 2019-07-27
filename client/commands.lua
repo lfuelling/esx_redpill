@@ -9,10 +9,10 @@ end
 
 function ExecuteRPCommand(command, machine)
     if command == "help" and commandEnabled(machine.commands, "help") then
-        return { result = true, print = "Available commands: 'help', 'echo'" }
+        return "Available commands: 'help', 'echo'"
     elseif command == "echo" and commandEnabled(machine.commands, "echo") then
-        return { result = true, print = command }
+        return command
     else
-        return { result = false, print = "Unknown command: '" .. command .. "'!" }
+        return "Unknown command: '" .. command .. "'!"
     end
 end
