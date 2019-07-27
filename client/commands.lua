@@ -1,6 +1,6 @@
-local function commandEnabled(table, val)
-    for i=1,#table do
-        if table[i] == val then
+local function commandEnabled(table, expected)
+    for _, val in ipairs(table) do
+        if val == expected then
             return true
         end
     end

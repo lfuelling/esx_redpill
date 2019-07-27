@@ -22,8 +22,9 @@ end)
 RegisterNUICallback('command', function(data, cb)
     if data.command then
         cb(ExecuteRPCommand(data.command, data.machine)) -- see client/commands.lua
+    else
+        cb({ result = true, print = "" }) -- empty commands return 0 in bash
     end
-    cb({result = true, print = ""}) -- empty commands return 0 in bash
 end)
 
 Citizen.CreateThread(function()
@@ -43,14 +44,20 @@ function drawPcMarkers()
 end
 
 function __drawPcMarkers(location)
-    if location.x == NIL then -- if we have a location inside
+    if location.x == NIL then
+        -- if we have a location inside
         for _, l2 in ipairs(location) do
             __drawPcMarkers(l2)
         end
-    elseif location.machine then -- some locations are not machines
+    elseif location.machine then
+        -- some locations are not machines
         drawGenericMarker(location.x, location.y, location.z - 1.001)
         if GetDistanceBetweenCoords(location.x, location.y, location.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
-            EnableGui(true, location.machine)
+            if IsControlJustPressed(1, 38) then
+                EnableGui(true, location.machine)
+            else
+                ESX.ShowHelpNotification(_U('press_interact_to_hack'))
+            end
         end
     end
 end
@@ -113,16 +120,6 @@ Citizen.CreateThread(function()
                 else
                     ESX.ShowHelpNotification(_U('press_interact_to_exit'))
                 end
-            end
-
-            if GetDistanceBetweenCoords(Locations.CommRoom.Pc.x, Locations.CommRoom.Pc.y, Locations.CommRoom.Pc.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
-                if IsControlJustPressed(1, 38) then
-                    EnableGui(true, Locations.CommRoom.Pc.machine)
-                else
-                    ESX.ShowHelpNotification(_U('press_interact_to_hack'))
-                end
-            else
-                drawGenericMarker(Locations.CommRoom.Pc.x, Locations.CommRoom.Pc.y, Locations.CommRoom.Pc.z - 1.001)
             end
         end
     end
