@@ -6,7 +6,7 @@ $(function () {
             if(event.data.enable) {
                 $('#screen').terminal(function (command, term) {
                     term.pause();
-                    $.post('http://esx_redpill/command', {command: command}).then(function (response) {
+                    $.post('http://esx_redpill/command', {command: command, machine: event.data.machine}).then(function (response) {
                         if(response.result) {
                             term.echo(response.print).resume();
                         } else {
@@ -15,7 +15,7 @@ $(function () {
                     });
                 }, {
                     greetings: 'Welcome to Redpill OS v0.1',
-                    prompt: '$ '
+                    prompt: event.data.machine.user + '@rpos $ '
                 });
             }
         }

@@ -3,24 +3,25 @@ local guiEnabled = false
 local isHacking = false
 
 -- shows the GUI
-function EnableGui(enable)
+function EnableGui(enable, machineToHack)
     SetNuiFocus(enable)
     guiEnabled = enable
 
     SendNUIMessage({
         type = "enableui",
-        enable = enable
+        enable = enable,
+        machine = machineToHack
     })
 end
 
 RegisterNUICallback('escape', function(data, cb)
-    EnableGui(false)
+    EnableGui(false, NIL)
     cb('ok')
 end)
 
 RegisterNUICallback('command', function(data, cb)
     if data.command then
-        cb(ExecuteRPCommand(data.command)) -- see client/commands.lua
+        cb(ExecuteRPCommand(data.command, data.machine)) -- see client/commands.lua
     end
     cb({result = true, print = ""}) -- empty commands return 0 in bash
 end)
@@ -36,9 +37,22 @@ end)
 
 function drawPcMarkers()
     -- draw markers for all hackable pcs
-    drawGenericMarker(Locations.CommRoom.Pc.x, Locations.CommRoom.Pc.y, Locations.CommRoom.Pc.z - 1.0001)
-    drawGenericMarker(Locations.LiveInvader.AdminPc.x, Locations.LiveInvader.AdminPc.y, Locations.LiveInvader.AdminPc.z - - 1.0001)
-    drawGenericMarker(Locations.LiveInvader.DevPc.x, Locations.LiveInvader.DevPc.y, Locations.LiveInvader.DevPc.z - 1.0001)
+    for _, location in ipairs(Locations) do
+        __drawPcMarkers(location)
+    end
+end
+
+function __drawPcMarkers(location)
+    if location.x == NIL then -- if we have a location inside
+        for _, l2 in ipairs(location) do
+            __drawPcMarkers(l2)
+        end
+    else
+        drawGenericMarker(location.x, location.y, location.z - 1.001)
+        if GetDistanceBetweenCoords(location.x, location.y, location.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
+            EnableGui(true, location.machine)
+        end
+    end
 end
 
 function drawGenericMarker(x, y, z)
@@ -61,7 +75,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
 
-        if ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'hacker' then
+        if isHacking then
             drawPcMarkers()
         else
             drawGenericMarker(Locations.RedpillMarker.Entry.x, Locations.RedpillMarker.Entry.y, Locations.RedpillMarker.Entry.z - 1.001)
@@ -103,7 +117,7 @@ Citizen.CreateThread(function()
 
             if GetDistanceBetweenCoords(Locations.CommRoom.Pc.x, Locations.CommRoom.Pc.y, Locations.CommRoom.Pc.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
                 if IsControlJustPressed(1, 38) then
-                    EnableGui(true)
+                    EnableGui(true, Locations.CommRoom.Pc.machine)
                 else
                     ESX.ShowHelpNotification(_U('press_interact_to_hack'))
                 end

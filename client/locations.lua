@@ -6,7 +6,10 @@ Locations.RedpillMarker = {
 }
 
 Locations.CommRoom = { x = 154.31, y = -764.62, z = 258.2, hdg = 164.48, -- IAA Building top floor comm room
-                       Pc = { x = 153.25, y = -767.46, z = 258.15 }, -- Desk with switched on monitors in comm room
+                       Pc = { x = 153.25, y = -767.46, z = 258.15, machine = {
+                           user = "root",
+                           commands = { "echo", "help" }
+                       } }, -- Desk with switched on monitors in comm room
                        Exit = { x = 150.9, y = -762.94, z = 258.15 } -- Comm room door
 }
 
