@@ -20,11 +20,12 @@ $(function () {
                     greetings: 'Welcome to Redpill OS v0.1',
                     prompt: event.data.machine.user + '@' + event.data.machine.hostname + ' $ '
                 });
+                console.log("Terminal initialized!")
             } else {
-                term.purge();
+                term.destroy();
+                console.log('Terminal destroyed!');
             }
         } else if (event.data.type === "terminalOut") {
-            console.log('terminalOut received!');
             if (term !== undefined) {
                 term.echo(event.data.output);
             }
