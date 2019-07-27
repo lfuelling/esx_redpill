@@ -64,10 +64,10 @@ Citizen.CreateThread(function()
         if ESX.PlayerData.job ~= nil and ESX.PlayerData.job.name == 'hacker' then
             drawPcMarkers()
         else
-            drawGenericMarker(Locations.RedpillMarker.x, Locations.RedpillMarker.y, Locations.RedpillMarker.z - 1.001)
+            drawGenericMarker(Locations.RedpillMarker.Entry.x, Locations.RedpillMarker.Entry.y, Locations.RedpillMarker.Entry.z - 1.001)
 
-            if GetDistanceBetweenCoords(Locations.RedpillMarker.x, Locations.RedpillMarker.y, Locations.RedpillMarker.z, GetEntityCoords(GetPlayerPed(-1), true)) < 5 then
-                if GetDistanceBetweenCoords(Locations.RedpillMarker.x, Locations.RedpillMarker.y, Locations.RedpillMarker.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
+            if GetDistanceBetweenCoords(Locations.RedpillMarker.Entry.x, Locations.RedpillMarker.Entry.y, Locations.RedpillMarker.Entry.z, GetEntityCoords(GetPlayerPed(-1), true)) < 7 then
+                if GetDistanceBetweenCoords(Locations.RedpillMarker.Entry.x, Locations.RedpillMarker.Entry.y, Locations.RedpillMarker.Entry.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
                     Citizen.Wait(2000) -- wait for elevator doors
                     DoScreenFadeOut(1000)
                     Citizen.Wait(500)
@@ -93,7 +93,7 @@ Citizen.CreateThread(function()
                 if IsControlJustPressed(1, 38) then
                     DoScreenFadeOut(1000)
                     Citizen.Wait(500)
-                    SetEntityCoords(Locations.RedpillMarker.x, Locations.RedpillMarker.y, Locations.RedpillMarker.z)
+                    SetEntityCoords(Locations.RedpillMarker.Exit.x, Locations.RedpillMarker.Exit.y, Locations.RedpillMarker.Exit.z)
                     DoScreenFadeIn(1000)
                     isHacking = false
                 else
