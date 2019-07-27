@@ -59,7 +59,9 @@ function __drawPcMarkers(location)
     else
         -- we need to go deeper
         for _, l2 in pairs(location) do
-            __drawPcMarkers(l2)
+            if l2 ~= NIL then
+                __drawPcMarkers(l2)
+            end
         end
     end
 end
