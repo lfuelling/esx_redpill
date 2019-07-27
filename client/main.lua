@@ -44,20 +44,22 @@ function drawPcMarkers()
 end
 
 function __drawPcMarkers(location)
-    if location.x == NIL then
-        -- if we have a location inside
+    if location.x ~= NIL then
+        -- some locations are not machines
+        if location.machine then
+            drawGenericMarker(location.x, location.y, location.z - 1.001)
+            if GetDistanceBetweenCoords(location.x, location.y, location.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
+                if IsControlJustPressed(1, 38) then
+                    EnableGui(true, location.machine)
+                else
+                    ESX.ShowHelpNotification(_U('press_interact_to_hack'))
+                end
+            end
+        end
+    else
+        -- we need to go deeper
         for _, l2 in ipairs(location) do
             __drawPcMarkers(l2)
-        end
-    elseif location.machine then
-        -- some locations are not machines
-        drawGenericMarker(location.x, location.y, location.z - 1.001)
-        if GetDistanceBetweenCoords(location.x, location.y, location.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
-            if IsControlJustPressed(1, 38) then
-                EnableGui(true, location.machine)
-            else
-                ESX.ShowHelpNotification(_U('press_interact_to_hack'))
-            end
         end
     end
 end
@@ -77,7 +79,7 @@ function drawGenericMarker(x, y, z)
             false) -- draw on intersecting
 end
 
--- intro/start of mission logic
+-- mission logic
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
@@ -116,6 +118,7 @@ Citizen.CreateThread(function()
                     Citizen.Wait(500)
                     SetEntityCoords(Locations.RedpillMarker.Exit.x, Locations.RedpillMarker.Exit.y, Locations.RedpillMarker.Exit.z)
                     DoScreenFadeIn(1000)
+                    Citizen.Wait(1500)
                     isHacking = false
                 else
                     ESX.ShowHelpNotification(_U('press_interact_to_exit'))
