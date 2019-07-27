@@ -31,11 +31,15 @@ local function __ipAL(machine)
 
             "2: enp0s4: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc fq_codel state DOWN group default qlen 1000\n" ..
             "\tlink/ether a1:e4:31:c9:10:4f brd ff:ff:ff:ff:ff:ff\n" ..
-            "\tinet ".. machine.ip.address .. "/".. machine.ip.subnet.. " brd ".. machine.ip.network .. " scope global dynamic noprefixroute enp0s4\n\t\tvalid_lft 37214sec preferred_lft 37214sec"
+            "\tinet " .. machine.ip.address .. "/" .. machine.ip.subnet .. " brd " .. machine.ip.network .. " scope global dynamic noprefixroute enp0s4\n\t\tvalid_lft 37214sec preferred_lft 37214sec"
 end
 
 local function __unameA(machine)
-    return "RedpillOS " .. machine.hostname .. " ".. machine.version .. "-generic " .. os.date("%Y/%m/%d %X") .. " x86_64 Redpill"
+    return "RedpillOS " .. machine.hostname .. " " ..
+            machine.version .. "-generic " ..
+            _U('dow_' .. time.GetClockDayOfWeek()) .. " " .. time.GetClockYear() .. "/" .. time.GetClockMonth() .. "/" .. time.GetClockDayOfMonth() ..
+            time.GetClockHours .. ":" .. time.GetClockMinutes .. ":" .. time.GetClockSeconds ..
+            " x86_64 Redpill"
 end
 
 function ExecuteRPCommand(command, machine)
@@ -44,7 +48,7 @@ function ExecuteRPCommand(command, machine)
     elseif startsWith(command, "echo") and commandEnabled(machine.commands, "echo") then
         return command
     elseif startsWith(command, "ip") and commandEnabled(machine.commands, "ip") then
-        return __ipAL()
+        return __ipAL(machine)
     elseif startsWith(command, "uname") and commandEnabled(machine.commands, "uname") then
         return __unameA(machine)
     else
