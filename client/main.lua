@@ -47,7 +47,7 @@ function __drawPcMarkers(location)
         for _, l2 in ipairs(location) do
             __drawPcMarkers(l2)
         end
-    else
+    elseif location.machine then -- some locations are not machines
         drawGenericMarker(location.x, location.y, location.z - 1.001)
         if GetDistanceBetweenCoords(location.x, location.y, location.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
             EnableGui(true, location.machine)
