@@ -12,7 +12,6 @@ $(function () {
         }
     });
 
-
     $('#screen').terminal(function (command, term) {
         term.pause();
         $.post('http://esx_redpill/command', {command: command}).then(function (response) {

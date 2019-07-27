@@ -3,7 +3,9 @@ Locations = {}
 Locations.RedpillMarker = { x = -2050.62, y = 3236.5, z = 31.5 } -- Fort Zancudo bunker elevator
 
 Locations.CommRoom = { x = 154.31, y = -764.62, z = 258.2, hdg = 164.48, -- IAA Building top floor comm room
-             Pc = { x = 153.25, y = -767.46, z = 258.15 } } -- Desk with switched on monitors in comm room
+                       Pc = { x = 153.25, y = -767.46, z = 258.15 }, -- Desk with switched on monitors in comm room
+                       Exit = { x = 150.9, y = -762.94, z = 258.15 } -- Comm room door
+}
 
 Locations.LiveInvader = {
     AdminPc = { x = -1053.16, y = -230.2, z = 44.02 }, -- LiveInvader server room pc

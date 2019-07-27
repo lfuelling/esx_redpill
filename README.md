@@ -9,7 +9,6 @@ Hacking minigame(/mission/job) featuring proper terminals with some sort of UNIX
 - [bob74_ipl](https://github.com/Bob74/bob74_ipl/)
 - [esx_drugfarms](https://github.com/lfuelling/esx_drugfarms/)
 - [es_extended](https://github.com/ESX-Org/es_extended)
-- [esx_jobs](https://github.com/ESX-Org/esx_jobs)
 - [esx_phone](https://github.com/ESX-Org/esx_phone)
 - [Peds](https://github.com/SFL-Master/Peds) (optional)
 
@@ -18,6 +17,8 @@ Hacking minigame(/mission/job) featuring proper terminals with some sort of UNIX
 1. Place repo in `resources/[esx]/`
 2. Add `start esx_redpill` to bottom of `server.cfg`
 3. Go to Fort Zancudo's elevator (right below the UFO) to trigger mission start
+
+*(You can ignore the SQL file for now, there is no integration with esx_jobs implemented right now!)*
 
 ## Usage
 
