@@ -9,7 +9,7 @@ Locations = {
                             hostname = "comm-room",
                             user = "root",
                             version = "1.0.0-01",
-                            ip = { address = "192.168.1.102", subnet = "24", network = "192.168.1.0" },
+                            ip = { address = "192.168.1.102", subnet = "24", network = "192.168.1.0", interface = "enp0s1" },
                             commands = { "echo", "ip", "uname" }
                         }
                  },
@@ -21,7 +21,7 @@ Locations = {
                         hostname = "invader-00",
                         user = "root",
                         version = "1.0.0-01",
-                        ip = { address = "10.1.0.100", subnet = "8", network = "10.0.0.0" },
+                        ip = { address = "10.1.0.100", subnet = "8", network = "10.0.0.0", interface = "enp1s4" },
                         commands = { "echo", "ip", "uname" }
                     }
         },
@@ -30,7 +30,7 @@ Locations = {
                       hostname = "invader-04",
                       user = "kevin",
                       version = "1.0.0-01",
-                      ip = { address = "10.1.0.104", subnet = "8", network = "10.0.0.0" },
+                      ip = { address = "10.1.0.104", subnet = "8", network = "10.0.0.0", interface = "enp0s2" },
                       commands = { "echo", "ip", "uname" }
                   }
         },
@@ -51,7 +51,7 @@ Locations = {
                                hostname = "mrw-cc-01",
                                user = "mark",
                                version = "1.0.0-05-mil",
-                               ip = { address = "191.168.1.101", subnet = "24", network = "192.168.1.0" },
+                               ip = { address = "191.168.1.101", subnet = "24", network = "192.168.1.0", interface = "enp0s2" },
                                commands = { "echo", "ip", "uname" }
                            }
         },
@@ -60,7 +60,7 @@ Locations = {
                                hostname = "mrw-cc-02",
                                user = "stan",
                                version = "1.0.0-05-mil",
-                               ip = { address = "191.168.1.102", subnet = "24", network = "192.168.1.0" },
+                               ip = { address = "191.168.1.102", subnet = "24", network = "192.168.1.0", interface = "enp0s2" },
                                commands = { "echo", "ip", "uname" }
                            }
         }
@@ -71,7 +71,7 @@ Locations = {
                        hostname = "0wn3r",
                        user = "root",
                        version = "1.0.0-01",
-                       ip = { address = "191.168.0.1", subnet = "24", network = "192.168.1.0" },
+                       ip = { address = "191.168.0.1", subnet = "24", network = "192.168.1.0", interface = "enp5s2" },
                        commands = { "echo", "ip", "uname" }
                    }
         },
@@ -80,7 +80,7 @@ Locations = {
                             hostname = "2pwn4u",
                             user = "root",
                             version = "1.0.0-01",
-                            ip = { address = "191.168.0.2", subnet = "24", network = "192.168.1.0" },
+                            ip = { address = "191.168.0.2", subnet = "24", network = "192.168.1.0", interface = "enp1s1" },
                             commands = { "echo", "ip", "uname" }
                         }
         },
@@ -89,7 +89,7 @@ Locations = {
                           hostname = "darnell",
                           user = "darnell",
                           version = "1.0.0-01",
-                          ip = { address = "191.168.50.134", subnet = "24", network = "192.168.50.0" },
+                          ip = { address = "191.168.50.134", subnet = "24", network = "192.168.50.0", interface = "wlp4s2" },
                           commands = { "echo", "ip", "uname" }
                       }
         }
@@ -100,7 +100,7 @@ Locations = {
                           hostname = "franklins-fruitbook-expert",
                           user = "franklin",
                           version = "1.0.0-01",
-                          ip = { address = "191.168.1.101", subnet = "24", network = "192.168.1.0" },
+                          ip = { address = "191.168.1.101", subnet = "24", network = "192.168.1.0", interface = "wlp0s4" },
                           commands = { "echo", "ip", "uname" }
                       }
         }
@@ -111,7 +111,7 @@ Locations = {
                               hostname = "gasstation",
                               user = "user",
                               version = "1.0.0-01",
-                              ip = { address = "191.168.1.101", subnet = "24", network = "192.168.1.0" },
+                              ip = { address = "191.168.1.101", subnet = "24", network = "192.168.1.0", interface = "wlp0s2" },
                               commands = { "echo", "ip", "uname" }
                           }
         },
@@ -120,7 +120,7 @@ Locations = {
                               hostname = "tqll",
                               user = "dj",
                               version = "1.0.0-01",
-                              ip = { address = "191.168.1.101", subnet = "24", network = "192.168.1.0" },
+                              ip = { address = "191.168.1.101", subnet = "24", network = "192.168.1.0", interface = "enp2s1" },
                               commands = { "echo", "ip", "uname" }
                           }
         }
@@ -131,7 +131,7 @@ Locations = {
                          hostname = "0-1-3",
                          user = "user",
                          version = "1.0.0-01",
-                         ip = { address = "191.168.200.104", subnet = "24", network = "192.168.200.0" },
+                         ip = { address = "191.168.200.104", subnet = "24", network = "192.168.200.0", interface = "enp0s1" },
                          commands = { "echo", "ip", "uname" }
                      }
         },
@@ -140,7 +140,7 @@ Locations = {
                               hostname = "1-1-1",
                               user = "user",
                               version = "1.0.0-01",
-                              ip = { address = "191.168.200.106", subnet = "24", network = "192.168.200.0" },
+                              ip = { address = "191.168.200.106", subnet = "24", network = "192.168.200.0", interface = "enp0s1" },
                               commands = { "echo", "ip", "uname" }
                           }
         },
@@ -149,7 +149,7 @@ Locations = {
                               hostname = "1-1-2",
                               user = "user",
                               version = "1.0.0-01",
-                              ip = { address = "191.168.200.112", subnet = "24", network = "192.168.200.0" },
+                              ip = { address = "191.168.200.112", subnet = "24", network = "192.168.200.0", interface = "enp0s1" },
                               commands = { "echo", "ip", "uname" }
                           }
         },
@@ -158,7 +158,7 @@ Locations = {
                         hostname = "0-0-1",
                         user = "user",
                         version = "1.0.0-01",
-                        ip = { address = "191.168.200.102", subnet = "24", network = "192.168.200.0" },
+                        ip = { address = "191.168.200.102", subnet = "24", network = "192.168.200.0", interface = "enp0s1" },
                         commands = { "echo", "ip", "uname" }
                     }
         },
