@@ -7,7 +7,7 @@ $(function () {
             if (event.data.enable) {
                 term = $('#screen').terminal(function (command, term) {
                     term.pause();
-                    $.post('http://esx_redpill/command', {command: command, machine: event.data.machine});
+                    $.post('http://esx_redpill/command', JSON.stringify({command: command, machine: event.data.machine}));
                     term.resume();
                 }, {
                     greetings: 'Welcome to Redpill OS v0.1',
