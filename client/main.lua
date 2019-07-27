@@ -1,6 +1,8 @@
 ESX = nil
 local guiEnabled = false
 local isHacking = false
+local tutorialDone = false
+local eventNameSpace = "term:"
 
 -- shows the GUI
 function EnableGui(enable, machineToHack)
@@ -13,6 +15,10 @@ function EnableGui(enable, machineToHack)
         machine = machineToHack
     })
 end
+
+AddEventHandler(eventNameSpace .. "tutorialDone", function()
+    tutorialDone = true
+end)
 
 RegisterNUICallback('escape', function(data)
     EnableGui(false, NIL)
@@ -104,6 +110,7 @@ Citizen.CreateThread(function()
                     SetEntityCoords(GetPlayerPed(-1), Locations.CommRoom.Entry.x, Locations.CommRoom.Entry.y, Locations.CommRoom.Entry.z, Locations.CommRoom.Entry.hdg)
                     DoScreenFadeIn(1000)
                     isHacking = true
+                    Citizen.Wait(500)
                     ESX.ShowAdvancedNotification(_U('intro_msg_sender'), _U('intro_msg_subtitle1'), -- title, subtitle
                             _U('intro_msg_text1'), -- message
                             "CHAR_OMEGA", 1) -- contact photo, symbol
@@ -126,6 +133,7 @@ Citizen.CreateThread(function()
 
         if isHacking then
             drawGenericMarker(Locations.CommRoom.Exit.x, Locations.CommRoom.Exit.y, Locations.CommRoom.Exit.z - 1.0001)
+
             if GetDistanceBetweenCoords(Locations.CommRoom.Exit.x, Locations.CommRoom.Exit.y, Locations.CommRoom.Exit.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
                 if IsControlJustPressed(1, 38) then
                     DoScreenFadeOut(1000)
@@ -133,11 +141,27 @@ Citizen.CreateThread(function()
                     SetEntityCoords(GetPlayerPed(-1), Locations.RedpillMarker.Exit.x, Locations.RedpillMarker.Exit.y, Locations.RedpillMarker.Exit.z)
                     DoScreenFadeIn(1000)
                     Citizen.Wait(1500)
-                    isHacking = false
+                    if tutorialDone then
+                        ESX.ShowAdvancedNotification(_U('intro_msg_sender'), _U('intro_msg_subtitle_done'), -- title, subtitle
+                                _U('intro_msg_text_done'), -- message
+                                "CHAR_OMEGA", 1) -- contact photo, symbol
+                    else
+                        isHacking = false
+                        Citizen.Wait(500)
+                        ESX.ShowAdvancedNotification(_U('intro_msg_sender'), _U('intro_msg_subtitle_quit'), -- title, subtitle
+                                _U('intro_msg_text_quit'), -- message
+                                "CHAR_OMEGA", 1) -- contact photo, symbol
+                    end
                 else
-                    ESX.ShowHelpNotification(_U('press_interact_to_exit'))
+                    if tutorialDone then
+                        ESX.ShowHelpNotification(_U('press_interact_to_exit'))
+                    else
+                        ESX.ShowHelpNotification(_U('press_interact_to_quit'))
+                    end
                 end
             end
+
+
         end
     end
 end)

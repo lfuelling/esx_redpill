@@ -1,7 +1,8 @@
 Locales['en'] = {
     ['intro_help_text'] = "Step into the ~b~elevator~s~.",
     ['press_interact_to_hack'] = "Press ~INPUT_CONTEXT~ to start ~b~hacking~s~.",
-    ['press_interact_to_exit'] = "Press ~INPUT_CONTEXT~ exit and stop ~b~hacking~s~.",
+    ['press_interact_to_exit'] = "Press ~INPUT_CONTEXT~ exit.",
+    ['press_interact_to_quit'] = "Press ~INPUT_CONTEXT~ exit and stop ~b~hacking~s~.",
     ['dow_0'] = "Sun",
     ['dow_1'] = "Mon",
     ['dow_2'] = "Tue",
@@ -12,8 +13,12 @@ Locales['en'] = {
     ['intro_msg_sender'] = "Omega",
     ['intro_msg_subtitle1'] = "Hacker?! (1/2)",
     ['intro_msg_subtitle2'] = "Hacker?! (2/2)",
+    ['intro_msg_subtitle_quit'] = "I Knew It!",
+    ['intro_msg_subtitle_done'] = "Good Work!",
     ['intro_msg_text1'] = "So you want to be a hacker? Hah! Prove it!",
     ['intro_msg_text2'] = "Read the WELCOME.md file on the machine at your location! Act accordingly!",
+    ['intro_msg_text_quit'] = "It was obvious that you wouldn't make it! Well, I gotta find someone better.",
+    ['intro_msg_text_done'] = "You know what you have to do. I'm awaiting your message!",
     ['intro_file_content'] = "Good work!\nNow let's get to business. I need the hostname of the main machine of Lester Crest. " ..
             "We both know who I'm talking about.\n\nGo to his house, get the information, write it to my number.\nEasy, right?",
 }

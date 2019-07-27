@@ -17,7 +17,9 @@ end
 
 local function countElems(table)
     local count = 0
-    for _ in pairs(table) do count = count + 1 end
+    for _ in pairs(table) do
+        count = count + 1
+    end
     return count
 end
 
@@ -59,6 +61,10 @@ local function __cat(machine, command)
     for _, file in ipairs(machine.files) do
         -- yes, I'm THAT cheap
         if command == 'cat ' .. file.path then
+            if file.action ~= NIL then
+                -- some files trigger events
+                TriggerEvent("term:" .. file.action)
+            end
             return file.content
         end
     end

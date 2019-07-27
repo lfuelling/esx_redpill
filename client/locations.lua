@@ -14,7 +14,7 @@ Locations = {
                             version = "1.0.0-01",
                             ip = { address = "192.168.1.102", subnet = "24", network = "192.168.1.0", interface = "enp0s1" },
                             files = {
-                                { path = "/WELCOME.md", content = _U('intro_file_content') }
+                                { path = "/WELCOME.md", content = _U('intro_file_content'), action = "tutorialDone" }
                             },
                             commands = { "echo", "ip", "uname", "ls", "cat" }
                         }
