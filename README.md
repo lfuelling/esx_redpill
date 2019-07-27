@@ -7,6 +7,7 @@ Work in progress!
 ## Dependencies
 
 - [bob74_ipl](https://github.com/Bob74/bob74_ipl/)
+- [esx_drugfarms](https://github.com/lfuelling/esx_drugfarms/)
 - [es_extended](https://github.com/ESX-Org/es_extended)
 - [esx_jobs](https://github.com/ESX-Org/esx_jobs)
 - [esx_phone](https://github.com/ESX-Org/esx_phone)
@@ -16,7 +17,7 @@ Work in progress!
 
 1. Place repo in `resources/[esx]/`
 2. Add `start esx_redpill` to bottom of `server.cfg`
-3. Go to Fort Zancudo's elevator (right below the UFO) to trigger start
+3. Go to Fort Zancudo's elevator (right below the UFO) to trigger mission start
 
 ## Usage
 
@@ -27,7 +28,7 @@ Work in progress!
 ## Devnotes
 
 As I stated above this is neither finished nor fully thought out. 
-Things might change until 1.0 is release and as of right now, it's pretty much unplayable and using it only makes sense if you want to report bugs or help developing.
+Things might change until 1.0 is released and as of right now, it's pretty much unplayable and using it only makes sense if you want to report bugs or help developing.
 
 These devnotes are for ideas I have (ie. they are nto final). For real plans, please see the open issues on GitHub.
 
@@ -37,8 +38,8 @@ These devnotes are for ideas I have (ie. they are nto final). For real plans, pl
     - "We need the open ports on this machine"
     - "Change password on this computer"
     - "Download and execute this script: $url"
-    - "Connect tou this IP from the computer"
-    - "Send me the username of this computer"
+    - "Connect to this IP from the computer"
+    - "Send me the username logged in to this computer"
     - "What is in file $filepath"
     - etc.
 1. Step in front of computer

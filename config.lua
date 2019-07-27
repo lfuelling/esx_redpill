@@ -1,3 +1,3 @@
 Config = {}
-Config.Locale = 'en'
-Config.Blips = true
+Config.Locale = 'en' -- available: en
+Config.AutoTeleport = false -- set to true to disable "press e to teleport"-propts
