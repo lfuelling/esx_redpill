@@ -104,6 +104,13 @@ Citizen.CreateThread(function()
                     SetEntityCoords(GetPlayerPed(-1), Locations.CommRoom.Entry.x, Locations.CommRoom.Entry.y, Locations.CommRoom.Entry.z, Locations.CommRoom.Entry.hdg)
                     DoScreenFadeIn(1000)
                     isHacking = true
+                    ESX.ShowAdvancedNotification(_U('intro_msg_sender'), _U('intro_msg_subtitle1'), -- title, subtitle
+                            _U('intro_msg_text1'), -- message
+                            "CHAR_OMEGA", 1) -- contact photo, symbol
+                    Citizen.Wait(4000) -- give the user time to read
+                    ESX.ShowAdvancedNotification(_U('intro_msg_sender'), _U('intro_msg_subtitle2'), -- title, subtitle
+                            _U('intro_msg_text2'), -- message
+                            "CHAR_OMEGA", 1) -- contact photo, symbol
                 else
                     ESX.ShowHelpNotification(_U('intro_help_text'))
                 end

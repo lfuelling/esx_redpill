@@ -1,3 +1,6 @@
+--
+-- IMPORTANT: To use "ip", you need to add the "ip" property, to use "uname" you need the "version" property, and to use "ls" and "cat" you need the "files" property!
+--
 Locations = {
     RedpillMarker = {
         Entry = { x = -2050.62, y = 3236.5, z = 31.5 }, -- Fort Zancudo bunker elevator
@@ -10,7 +13,10 @@ Locations = {
                             user = "root",
                             version = "1.0.0-01",
                             ip = { address = "192.168.1.102", subnet = "24", network = "192.168.1.0", interface = "enp0s1" },
-                            commands = { "echo", "ip", "uname" }
+                            files = {
+                                { path = "/WELCOME.md", content = _U('intro_file_content') }
+                            },
+                            commands = { "echo", "ip", "uname", "ls", "cat" }
                         }
                  },
                  Exit = { x = 150.9, y = -762.94, z = 258.15 } -- Comm room door

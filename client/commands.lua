@@ -15,6 +15,12 @@ local function endsWith(str, ending)
     return ending == "" or str:sub(-#ending) == ending
 end
 
+local function countElems(table)
+    local count = 0
+    for _ in pairs(table) do count = count + 1 end
+    return count
+end
+
 local function __help(commands)
     output = "Available commands: 'help'"
     for _, val in ipairs(commands) do
@@ -41,6 +47,24 @@ local function __unameA(machine)
             " x86_64 Redpill"
 end
 
+local function __ls(machine)
+    output = "total " .. countElems(machine.files)
+    for _, file in ipairs(machine.files) do
+        output = output .. "\n" .. file.path;
+    end
+    return output
+end
+
+local function __cat(machine, command)
+    for _, file in ipairs(machine.files) do
+        -- yes, I'm THAT cheap
+        if command == 'cat ' .. file.name then
+            return file.content
+        end
+    end
+    return command .. ": No such file or directory!"
+end
+
 function ExecuteRPCommand(command, machine)
     if startsWith(command, "help") then
         return __help(machine.commands)
@@ -50,6 +74,10 @@ function ExecuteRPCommand(command, machine)
         return __ipAL(machine)
     elseif startsWith(command, "uname") and commandEnabled(machine.commands, "uname") then
         return __unameA(machine)
+    elseif startsWith(command, "ls") and commandEnabled(machine.commands, "ls") then
+        return __ls(machine)
+    elseif startsWith(command, "cat") and commandEnabled(machine.commands, "cat") then
+        return __cat(machine, command)
     else
         return "Unknown command: '" .. command .. "'!"
     end
