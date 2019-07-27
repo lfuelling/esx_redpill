@@ -6,7 +6,7 @@ $(function () {
             if(event.data.enable) {
                 $('#screen').terminal(function (command, term) {
                     term.pause();
-                    $.post('http://esx_redpill/command', {command: command, machine: event.data.machine}).then(function (response) {
+                    $.post('http://esx_redpill/command', {command: command, machine: event.data.machine}, function (response) {
                         if(response.result) {
                             term.echo(response.print).resume();
                         } else {
