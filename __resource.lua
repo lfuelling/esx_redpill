@@ -25,9 +25,9 @@ client_scripts {
     '@es_extended/locale.lua',
     'locales/en.lua',
     'config.lua',
-    'client/main.lua',
     'client/locations.lua',
-    'client/commands.lua'
+    'client/commands.lua',
+    'client/main.lua',
 }
 
 server_scripts {
