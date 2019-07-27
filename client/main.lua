@@ -123,7 +123,7 @@ Citizen.CreateThread(function()
                 if IsControlJustPressed(1, 38) then
                     DoScreenFadeOut(1000)
                     Citizen.Wait(500)
-                    SetEntityCoords(Locations.RedpillMarker.Exit.x, Locations.RedpillMarker.Exit.y, Locations.RedpillMarker.Exit.z)
+                    SetEntityCoords(GetPlayerPed(-1), Locations.RedpillMarker.Exit.x, Locations.RedpillMarker.Exit.y, Locations.RedpillMarker.Exit.z)
                     DoScreenFadeIn(1000)
                     Citizen.Wait(1500)
                     isHacking = false
