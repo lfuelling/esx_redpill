@@ -102,13 +102,13 @@ Citizen.CreateThread(function()
             end
 
             if GetDistanceBetweenCoords(Locations.CommRoom.Pc.x, Locations.CommRoom.Pc.y, Locations.CommRoom.Pc.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
-                drawGenericMarker(Locations.CommRoom.Pc.x, Locations.CommRoom.Pc.y, Locations.CommRoom.Pc.z - 1.001)
-            else
                 if IsControlJustPressed(1, 38) then
                     EnableGui(true)
                 else
                     ESX.ShowHelpNotification(_U('press_interact_to_hack'))
                 end
+            else
+                drawGenericMarker(Locations.CommRoom.Pc.x, Locations.CommRoom.Pc.y, Locations.CommRoom.Pc.z - 1.001)
             end
         end
     end
