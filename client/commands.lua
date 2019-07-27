@@ -37,8 +37,7 @@ end
 local function __unameA(machine)
     return "RedpillOS " .. machine.hostname .. " " ..
             machine.version .. "-generic " ..
-            _U('dow_' .. time.GetClockDayOfWeek()) .. " " .. time.GetClockYear() .. "/" .. time.GetClockMonth() .. "/" .. time.GetClockDayOfMonth() ..
-            time.GetClockHours .. ":" .. time.GetClockMinutes .. ":" .. time.GetClockSeconds ..
+            "Thu 2010/06/17 13:37 UTC" ..
             " x86_64 Redpill"
 end
 
