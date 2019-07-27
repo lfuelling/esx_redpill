@@ -26,8 +26,8 @@ AddEventHandler('esx_phone:loaded', function(phoneNumber, contacts)
     phoneReady = true
 end)
 
-RegisterNetEvent(eventNamespace .. omegaNamespace)
-AddEventHandler(eventNamespace .. omegaNamespace, function(anon, message)
+RegisterNetEvent(eventNamespace .. omegaContact.namespace)
+AddEventHandler(eventNamespace .. omegaContact.namespace, function(anon, message)
     local responseMsg = ""
     if anon then
         responseMsg = responseMsg .. _U('intro_msg_text_anon')
