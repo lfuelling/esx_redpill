@@ -2,7 +2,7 @@
 
 Hacking minigame(/mission/job) featuring proper terminals with some sort of UNIX(-like) stuff running on them.
 
-Work in progress!
+**Work in progress! This is pretty much NOT useable at this stage!**
 
 ## Dependencies
 
