@@ -6,12 +6,17 @@ $(function () {
             if(event.data.enable) {
                 $('#screen').terminal(function (command, term) {
                     term.pause();
-                    $.post('http://esx_redpill/command', {command: command, machine: event.data.machine}, function (response) {
-                        if(response.result) {
-                            term.echo(response.print).resume();
-                        } else {
-                            term.echo("Error: " + response.print).resume();
-                        }
+                    $.ajax('http://esx_redpill/command', {
+                        accept:'*',
+                        data: {command: command, machine: event.data.machine},
+                        complete: function(req, status) {
+                            if(req.result) {
+                                term.echo(req.print).resume();
+                            } else {
+                                term.echo("Error: " + req.print).resume();
+                            }
+                        },
+                        method:'POST'
                     });
                 }, {
                     greetings: 'Welcome to Redpill OS v0.1',
