@@ -8,7 +8,9 @@ Locations = {
                         machine = {
                             hostname = "comm-room",
                             user = "root",
-                            commands = { "echo", "help" }
+                            version = "1.0.0-01",
+                            ip = { address = "192.168.1.102", subnet = "24", network = "192.168.1.0" },
+                            commands = { "echo", "ip", "uname" }
                         }
                  },
                  Exit = { x = 150.9, y = -762.94, z = 258.15 } -- Comm room door
@@ -18,14 +20,18 @@ Locations = {
                     machine = {
                         hostname = "invader-00",
                         user = "root",
-                        commands = { "echo", "help" }
+                        version = "1.0.0-01",
+                        ip = { address = "10.1.0.100", subnet = "8", network = "10.0.0.0" },
+                        commands = { "echo", "ip", "uname" }
                     }
         },
         DevPc = { x = -1050.67, y = -240.57, z = 44.02, -- Dev pc next to main meeting room
                   machine = {
                       hostname = "invader-04",
                       user = "kevin",
-                      commands = { "echo", "help" }
+                      version = "1.0.0-01",
+                      ip = { address = "10.1.0.104", subnet = "8", network = "10.0.0.0" },
+                      commands = { "echo", "ip", "uname" }
                   }
         },
     },
@@ -34,7 +40,8 @@ Locations = {
                      machine = {
                          hostname = "carrier-bridge",
                          user = "root",
-                         commands = { "echo", "help" }
+                         version = "1.0.1-08-mil",
+                         commands = { "echo", "uname" }
                      }
         }
     },
@@ -43,14 +50,18 @@ Locations = {
                            machine = {
                                hostname = "mrw-cc-01",
                                user = "mark",
-                               commands = { "echo", "help" }
+                               version = "1.0.0-05-mil",
+                               ip = { address = "191.168.1.101", subnet = "24", network = "192.168.1.0" },
+                               commands = { "echo", "ip", "uname" }
                            }
         },
         DualMonitorPc2 = { x = 563.08, y = -3124.32, z = 18.77,
                            machine = {
                                hostname = "mrw-cc-02",
                                user = "stan",
-                               commands = { "echo", "help" }
+                               version = "1.0.0-05-mil",
+                               ip = { address = "191.168.1.102", subnet = "24", network = "192.168.1.0" },
+                               commands = { "echo", "ip", "uname" }
                            }
         }
     },
@@ -59,21 +70,27 @@ Locations = {
                    machine = {
                        hostname = "0wn3r",
                        user = "root",
-                       commands = { "echo", "help" }
+                       version = "1.0.0-01",
+                       ip = { address = "191.168.0.1", subnet = "24", network = "192.168.1.0" },
+                       commands = { "echo", "ip", "uname" }
                    }
         },
         SecondaryPc = { x = 1272.31, y = -1711.54, z = 54.77,
                         machine = {
                             hostname = "2pwn4u",
                             user = "root",
-                            commands = { "echo", "help" }
+                            version = "1.0.0-01",
+                            ip = { address = "191.168.0.2", subnet = "24", network = "192.168.1.0" },
+                            commands = { "echo", "ip", "uname" }
                         }
         },
         FactoryPc = { x = 707.39, y = -966.97, z = 30.41,
                       machine = {
                           hostname = "darnell",
                           user = "darnell",
-                          commands = { "echo", "help" }
+                          version = "1.0.0-01",
+                          ip = { address = "191.168.50.134", subnet = "24", network = "192.168.50.0" },
+                          commands = { "echo", "ip", "uname" }
                       }
         }
     },
@@ -82,7 +99,9 @@ Locations = {
                       machine = {
                           hostname = "franklins-fruitbook-expert",
                           user = "franklin",
-                          commands = { "echo", "help" }
+                          version = "1.0.0-01",
+                          ip = { address = "191.168.1.101", subnet = "24", network = "192.168.1.0" },
+                          commands = { "echo", "ip", "uname" }
                       }
         }
     },
@@ -91,14 +110,18 @@ Locations = {
                           machine = {
                               hostname = "gasstation",
                               user = "user",
-                              commands = { "echo", "help" }
+                              version = "1.0.0-01",
+                              ip = { address = "191.168.1.101", subnet = "24", network = "192.168.1.0" },
+                              commands = { "echo", "ip", "uname" }
                           }
         },
         TequiLaLaDjPc = { x = -560.83, y = 280.8, z = 85.68,
                           machine = {
                               hostname = "tqll",
                               user = "dj",
-                              commands = { "echo", "help" }
+                              version = "1.0.0-01",
+                              ip = { address = "191.168.1.101", subnet = "24", network = "192.168.1.0" },
+                              commands = { "echo", "ip", "uname" }
                           }
         }
     },
@@ -107,28 +130,36 @@ Locations = {
                      machine = {
                          hostname = "0-1-3",
                          user = "user",
-                         commands = { "echo", "help" }
+                         version = "1.0.0-01",
+                         ip = { address = "191.168.200.104", subnet = "24", network = "192.168.200.0" },
+                         commands = { "echo", "ip", "uname" }
                      }
         },
         BackOfficePc1 = { x = 261.2, y = 204.95, z = 110.29,
                           machine = {
                               hostname = "1-1-1",
                               user = "user",
-                              commands = { "echo", "help" }
+                              version = "1.0.0-01",
+                              ip = { address = "191.168.200.106", subnet = "24", network = "192.168.200.0" },
+                              commands = { "echo", "ip", "uname" }
                           }
         },
         BackOfficePc2 = { x = 264.42, y = 211.12, z = 110.29,
                           machine = {
                               hostname = "1-1-2",
                               user = "user",
-                              commands = { "echo", "help" }
+                              version = "1.0.0-01",
+                              ip = { address = "191.168.200.112", subnet = "24", network = "192.168.200.0" },
+                              commands = { "echo", "ip", "uname" }
                           }
         },
         VaultPc = { x = 264.82, y = 219.85, z = 101.68,
                     machine = {
                         hostname = "0-0-1",
                         user = "user",
-                        commands = { "echo", "help" }
+                        version = "1.0.0-01",
+                        ip = { address = "191.168.200.102", subnet = "24", network = "192.168.200.0" },
+                        commands = { "echo", "ip", "uname" }
                     }
         },
     } }

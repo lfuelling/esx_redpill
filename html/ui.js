@@ -10,9 +10,8 @@ $(function () {
                     $.post('http://esx_redpill/command', JSON.stringify({
                         command: command,
                         machine: event.data.machine
-                    })).always(function () {
-                        term.resume();
-                    });
+                    }));
+                    term.resume();
                 }, {
                     greetings: 'Welcome to Redpill OS v0.1',
                     prompt: event.data.machine.user + '@' + event.data.machine.hostname + ' $ '
