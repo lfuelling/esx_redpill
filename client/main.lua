@@ -38,7 +38,7 @@ end)
 
 function drawPcMarkers()
     -- draw markers for all hackable pcs
-    for _, location in ipairs(Locations) do
+    for _, location in pairs(Locations) do
         __drawPcMarkers(location)
     end
 end
@@ -58,7 +58,7 @@ function __drawPcMarkers(location)
         end
     else
         -- we need to go deeper
-        for _, l2 in ipairs(location) do
+        for _, l2 in pairs(location) do
             __drawPcMarkers(l2)
         end
     end
