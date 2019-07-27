@@ -9,12 +9,15 @@ $(function () {
                     $.ajax('http://esx_redpill/command', {
                         accept:'*',
                         data: {command: command, machine: event.data.machine},
-                        complete: function(req, status) {
-                            if(req.result) {
-                                term.echo(req.print).resume();
+                        success: function(res) {
+                            if(res.data.result) {
+                                term.echo(res.data.print).resume();
                             } else {
-                                term.echo("Error: " + req.print).resume();
+                                term.echo("Error: " + res.data.print).resume();
                             }
+                        },
+                        error: function(res) {
+                            term.echo('An error occurred!').resume();
                         },
                         method:'POST'
                     });
