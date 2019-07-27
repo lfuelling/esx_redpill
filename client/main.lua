@@ -1,4 +1,21 @@
 ESX = nil
+local guiEnabled = false
+
+-- shows the GUI
+function EnableGui(enable)
+    SetNuiFocus(enable)
+    guiEnabled = enable
+
+    SendNUIMessage({
+        type = "enableui",
+        enable = enable
+    })
+end
+
+RegisterNUICallback('escape', function(data, cb)
+    EnableGui(false)
+    cb('ok')
+end)
 
 Citizen.CreateThread(function()
     while ESX == nil do
@@ -44,7 +61,7 @@ Citizen.CreateThread(function()
                 if GetDistanceBetweenCoords(Locations.RedpillMarker.x, Locations.RedpillMarker.y, Locations.RedpillMarker.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
                     Citizen.Wait(2000) -- wait for elevator doors
                     DoScreenFadeOut(1000)
-                    Citizen.Wait(1500)
+                    Citizen.Wait(500)
                     SetEntityCoords(GetPlayerPed(-1), Locations.CommRoom.x, Locations.CommRoom.y, Locations.CommRoom.z)
                     DoScreenFadeIn(1000)
                 else
