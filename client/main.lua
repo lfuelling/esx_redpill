@@ -14,16 +14,21 @@ function EnableGui(enable, machineToHack)
     })
 end
 
-RegisterNUICallback('escape', function(data, cb)
+RegisterNUICallback('escape', function(data)
     EnableGui(false, NIL)
-    cb('ok')
 end)
 
-RegisterNUICallback('command', function(data, cb)
+RegisterNUICallback('command', function(data)
     if data.command then
-        cb(ExecuteRPCommand(data.command, data.machine)) -- see client/commands.lua
+        SendNUIMessage({
+            action = 'terminalOut',
+            data = ExecuteRPCommand(data.command, data.machine),
+        })
     else
-        cb({ result = true, print = "" }) -- empty commands return 0 in bash
+        SendNUIMessage({
+            action = 'terminalOut',
+            data = { result = true, print = "" },
+        })
     end
 end)
 
