@@ -14,15 +14,22 @@ Hacking minigame(/mission/job) featuring proper terminals with some sort of UNIX
 
 ## Installation
 
-1. Place repo in `resources/[esx]/`
-2. Add `start esx_redpill` to bottom of `server.cfg`
-3. Go to Fort Zancudo's elevator (right below the UFO) to trigger mission start
+1. Download the latest release from [the releases page](https://github.com/lfuelling/esx_redpill/releases)
+2. Place folder in `resources/[esx]/`
+3. Add `start esx_redpill` to bottom of `server.cfg`
+4. Go to Fort Zancudo's elevator (right below the UFO) to trigger mission start
 
 *(You can ignore the SQL file for now, there is no integration with esx_jobs implemented right now!)*
 
 ## Usage
 
-1. TBD
+1. Go to Fort Zancudo
+2. Find the elevator (below the UFO mark if `esx_drugfarms` is active)
+3. Follow the tutorial
+
+If you don't know what to do when in front of a terminal just type in "help", press enter and try to go from there. 
+
+Otherwise you could learn how to use a shell, but note that most stuff you'll learn won't work in this mod. It's just scripted after all.
 
 -------------------------
 
