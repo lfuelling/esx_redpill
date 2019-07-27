@@ -7,21 +7,22 @@ $(function () {
             if (event.data.enable) {
                 term = $('#screen').terminal(function (command, term) {
                     term.pause();
-                    $.post('http://esx_redpill/command', JSON.stringify({command: command, machine: event.data.machine}));
-                    term.resume();
+                    $.post('http://esx_redpill/command', JSON.stringify({
+                        command: command,
+                        machine: event.data.machine
+                    })).always(function () {
+                        term.resume();
+                    });
                 }, {
                     greetings: 'Welcome to Redpill OS v0.1',
                     prompt: event.data.machine.user + '@' + event.data.machine.hostname + ' $ '
                 });
-                console.log('Terminal initialized.')
             } else {
                 term = undefined;
-                console.log('Terminal removed.')
             }
-        } else if(event.data.type === "terminalOut") {
+        } else if (event.data.type === "terminalOut") {
             console.log('terminalOut received!');
-            if(term !== undefined) {
-                console.log('printing: \'' + event.data.output + '\'');
+            if (term !== undefined) {
                 term.echo(event.data.output);
             }
         }

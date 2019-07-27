@@ -22,7 +22,7 @@ RegisterNUICallback('command', function(data)
     if data.command then
         SendNUIMessage({
             type = 'terminalOut',
-            output = json.encode(ExecuteRPCommand(data.command, data.machine)),
+            output = ExecuteRPCommand(data.command, data.machine),
         })
     else
         SendNUIMessage({
