@@ -17,6 +17,13 @@ RegisterNUICallback('escape', function(data, cb)
     cb('ok')
 end)
 
+RegisterNUICallback('command', function(data, cb)
+    if data.command then
+        cb(ExecuteRPCommand(data.command)) -- see client/commands.lua
+    end
+    cb({result = true, print = ""}) -- empty commands return 0 in bash
+end)
+
 Citizen.CreateThread(function()
     while ESX == nil do
         TriggerEvent('esx:getSharedObject', function(obj)
