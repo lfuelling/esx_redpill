@@ -21,7 +21,7 @@ $(function () {
                     prompt: event.data.machine.user + '@' + event.data.machine.hostname + ' $ '
                 });
             } else {
-                term = undefined;
+                term.purge();
             }
         } else if (event.data.type === "terminalOut") {
             console.log('terminalOut received!');
