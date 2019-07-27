@@ -8,7 +8,7 @@ INSERT INTO `job_grades` (job_name, grade, name, label, salary) VALUES
 ;
 
 INSERT INTO `jobs` (name, label) VALUES
-	('hacker','hacker')
+	('hacker','Hacker')
 ;
 
 INSERT INTO `items` (name, label, `limit`) VALUES

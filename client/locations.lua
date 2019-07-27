@@ -21,7 +21,7 @@ Locations = {
                  },
                  Exit = { x = 150.9, y = -762.94, z = 258.15 } -- Comm room door
     },
-    LiveInvader = {
+    LifeInvader = {
         AdminPc = { x = -1053.16, y = -230.2, z = 44.02, -- LiveInvader server room pc
                     machine = {
                         hostname = "invader-00",

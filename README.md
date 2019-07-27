@@ -2,7 +2,7 @@
 
 Hacking minigame(/mission/job) featuring proper terminals with some sort of UNIX(-like) stuff running on them.
 
-**Work in progress! This is pretty much NOT useable at this stage!**
+**Work in progress! Expect bugs, never use `master`!**
 
 ## Dependencies
 
@@ -10,16 +10,16 @@ Hacking minigame(/mission/job) featuring proper terminals with some sort of UNIX
 - [esx_drugfarms](https://github.com/lfuelling/esx_drugfarms/)
 - [es_extended](https://github.com/ESX-Org/es_extended)
 - [esx_phone](https://github.com/ESX-Org/esx_phone)
-- [Peds](https://github.com/SFL-Master/Peds) (optional)
+- [esx_phone](https://github.com/ESX-Org/esx_jobs)
+- [Peds](https://github.com/SFL-Master/Peds) (optional, recommended)
 
 ## Installation
 
 1. Download the latest release from [the releases page](https://github.com/lfuelling/esx_redpill/releases)
 2. Place folder in `resources/[esx]/`
-3. Add `start esx_redpill` to bottom of `server.cfg`
-4. Go to Fort Zancudo's elevator (right below the UFO) to trigger mission start
-
-*(You can ignore the SQL file for now, there is no integration with esx_jobs implemented right now!)*
+3. Add `esx_redpill.sql` to your database
+4. Add `start esx_redpill` to bottom of `server.cfg`
+5. Go to Fort Zancudo's elevator (right below the UFO) to trigger mission start
 
 ## Usage
 
@@ -29,7 +29,7 @@ Hacking minigame(/mission/job) featuring proper terminals with some sort of UNIX
 
 If you don't know what to do when in front of a terminal just type in "help", press enter and try to go from there. 
 
-Otherwise you could learn how to use a shell, but note that most stuff you'll learn won't work in this mod. It's just scripted after all.
+Otherwise you could learn how to use a shell, but note that most stuff you'll learn won't work in this mod. (Do it anyway! Terminals rule (literally)!)
 
 -------------------------
 
@@ -38,7 +38,7 @@ Otherwise you could learn how to use a shell, but note that most stuff you'll le
 As I stated above this is neither finished nor fully thought out. 
 Things might change until 1.0 is released and as of right now, it's pretty much unplayable and using it only makes sense if you want to report bugs or help developing.
 
-These devnotes are for ideas I have (ie. they are nto final). For real plans, please see the open issues on GitHub.
+These devnotes are for ideas I have (ie. they are not final). For real plans, please see the open issues on GitHub.
 
 ### Hacking
 

@@ -2,7 +2,8 @@ ESX = nil
 local guiEnabled = false
 local isHacking = false
 local tutorialDone = false
-local eventNameSpace = "term:"
+local phoneReady = false
+local numberAdded = false
 
 -- shows the GUI
 function EnableGui(enable, machineToHack)
@@ -16,8 +17,31 @@ function EnableGui(enable, machineToHack)
     })
 end
 
-AddEventHandler(eventNameSpace .. "tutorialDone", function()
+AddEventHandler(eventNamespace .. "tutorialDone", function()
     tutorialDone = true
+end)
+
+RegisterNetEvent('esx_phone:loaded')
+AddEventHandler('esx_phone:loaded', function(phoneNumber, contacts)
+    phoneReady = true
+end)
+
+RegisterNetEvent(eventNamespace .. omegaNamespace)
+AddEventHandler(eventNamespace .. omegaNamespace, function(anon, message)
+    local responseMsg = ""
+    if anon then
+        responseMsg = responseMsg .. _U('intro_msg_text_anon')
+    end
+    if message == Locations.Lester.MainPc.machine.hostname then
+        ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle_done'), -- title, subtitle
+                responseMsg .. _U('intro_msg_text_final'), -- message
+                "CHAR_OMEGA", 1) -- contact photo, symbol
+        ESX.GetPlayerFromId(source).setJob('hacker', 0)
+    else
+        ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle_wrong'), -- title, subtitle
+                responseMsg .. _U('intro_msg_text_fail'), -- message
+                "CHAR_OMEGA", 1) -- contact photo, symbol
+    end
 end)
 
 RegisterNUICallback('escape', function(data)
@@ -63,7 +87,7 @@ function __drawPcMarkers(location)
                 if IsControlJustPressed(1, 38) then
                     EnableGui(true, location.machine)
                 else
-                    ESX.ShowHelpNotification(_U('press_interact_to_hack'))
+                    ESX.ShowHelpNotification(missionMarker.hint)
                 end
             end
         end
@@ -97,9 +121,25 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
 
+        if ESX.GetPlayerData().job == 'hacker' and not isHacking then
+            isHacking = true
+            tutorialDone = true
+        end
+
         if isHacking then
             drawPcMarkers()
+            if phoneReady and tutorialDone and not numberAdded then
+                TriggerEvent('esx_phone:addSpecialContact', omegaContact.name, omegaContact.number, omegaContact.base64Icon)
+                numberAdded = true
+            end
         else
+            if numberAdded then
+                TriggerEvent('esx_phone:removeSpecialContact', omegaContact.number)
+                numberAdded = false
+            end
+            if tutorialDone then
+                tutorialDone = false
+            end
             drawGenericMarker(Locations.RedpillMarker.Entry.x, Locations.RedpillMarker.Entry.y, Locations.RedpillMarker.Entry.z - 1.001)
 
             if GetDistanceBetweenCoords(Locations.RedpillMarker.Entry.x, Locations.RedpillMarker.Entry.y, Locations.RedpillMarker.Entry.z, GetEntityCoords(GetPlayerPed(-1), true)) < 7 then
@@ -111,11 +151,11 @@ Citizen.CreateThread(function()
                     DoScreenFadeIn(1000)
                     isHacking = true
                     Citizen.Wait(500)
-                    ESX.ShowAdvancedNotification(_U('intro_msg_sender'), _U('intro_msg_subtitle1'), -- title, subtitle
+                    ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle1'), -- title, subtitle
                             _U('intro_msg_text1'), -- message
                             "CHAR_OMEGA", 1) -- contact photo, symbol
                     Citizen.Wait(4000) -- give the user time to read
-                    ESX.ShowAdvancedNotification(_U('intro_msg_sender'), _U('intro_msg_subtitle2'), -- title, subtitle
+                    ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle2'), -- title, subtitle
                             _U('intro_msg_text2'), -- message
                             "CHAR_OMEGA", 1) -- contact photo, symbol
                 else
@@ -142,13 +182,13 @@ Citizen.CreateThread(function()
                     DoScreenFadeIn(1000)
                     Citizen.Wait(1500)
                     if tutorialDone then
-                        ESX.ShowAdvancedNotification(_U('intro_msg_sender'), _U('intro_msg_subtitle_done'), -- title, subtitle
+                        ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle_done'), -- title, subtitle
                                 _U('intro_msg_text_done'), -- message
                                 "CHAR_OMEGA", 1) -- contact photo, symbol
                     else
                         isHacking = false
                         Citizen.Wait(500)
-                        ESX.ShowAdvancedNotification(_U('intro_msg_sender'), _U('intro_msg_subtitle_quit'), -- title, subtitle
+                        ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle_quit'), -- title, subtitle
                                 _U('intro_msg_text_quit'), -- message
                                 "CHAR_OMEGA", 1) -- contact photo, symbol
                     end
