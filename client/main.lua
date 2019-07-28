@@ -51,6 +51,7 @@ AddEventHandler(eventNamespace .. omegaContact.namespace, function(anon, message
         ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle_final'), -- title, subtitle
                 _U('intro_msg_text_final2'), -- message
                 "CHAR_OMEGA", 1) -- contact photo, symbol
+        TriggerEvent('esx_phone:removeSpecialContact', omegaContact.number)
     else
         ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle_wrong'), -- title, subtitle
                 responseMsg .. _U('intro_msg_text_fail'), -- message
