@@ -1,4 +1,13 @@
 ESX = nil
+Citizen.CreateThread(function()
+    while ESX == nil do
+        TriggerEvent('esx:getSharedObject', function(obj)
+            ESX = obj
+        end)
+        Citizen.Wait(0)
+    end
+end)
+
 local guiEnabled = false
 local isHacking = false
 local tutorialDone = false
@@ -36,7 +45,7 @@ AddEventHandler(eventNamespace .. omegaContact.namespace, function(anon, message
         ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle_done'), -- title, subtitle
                 responseMsg .. _U('intro_msg_text_final'), -- message
                 "CHAR_OMEGA", 1) -- contact photo, symbol
-        ESX.GetPlayerFromId(source).setJob('hacker', 0)
+        TriggerServerEvent(eventNamespace.."setJob", true)
     else
         ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle_wrong'), -- title, subtitle
                 responseMsg .. _U('intro_msg_text_fail'), -- message
