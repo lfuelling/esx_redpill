@@ -43,9 +43,13 @@ AddEventHandler(eventNamespace .. omegaContact.namespace, function(anon, message
     end
     if message == Locations.Lester.MainPc.machine.hostname then
         ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle_done'), -- title, subtitle
-                responseMsg .. _U('intro_msg_text_final'), -- message
+                responseMsg .. _U('intro_msg_text_final1'), -- message
                 "CHAR_OMEGA", 1) -- contact photo, symbol
-        TriggerServerEvent(eventNamespace.."setJob", true)
+        Citizen.wait(1500)
+        TriggerServerEvent(eventNamespace .. "setJob", true)
+        ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle_final'), -- title, subtitle
+                responseMsg .. _U('intro_msg_text_final2'), -- message
+                "CHAR_OMEGA", 1) -- contact photo, symbol
     else
         ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle_wrong'), -- title, subtitle
                 responseMsg .. _U('intro_msg_text_fail'), -- message
