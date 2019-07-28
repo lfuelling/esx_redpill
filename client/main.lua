@@ -45,7 +45,7 @@ AddEventHandler(eventNamespace .. omegaContact.namespace, function(anon, message
         ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle_done'), -- title, subtitle
                 responseMsg .. _U('intro_msg_text_final1'), -- message
                 "CHAR_OMEGA", 1) -- contact photo, symbol
-        Citizen.wait(1500)
+        Citizen.Wait(1500)
         TriggerServerEvent(eventNamespace .. "setJob", true)
         ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle_final'), -- title, subtitle
                 responseMsg .. _U('intro_msg_text_final2'), -- message
