@@ -27,4 +27,10 @@ Locales['en'] = {
     ['intro_file_content'] = "Good work!\nNow let's get to business. I need the hostname of the main machine of Lester Crest. " ..
             "We both know who I'm talking about.\n\nGo to his house, get the information, write it to my number.\nEasy, right?",
     ['life_invader_marker'] = "LifeInvader",
+    ['mission_1_msg_text_final'] = "Good work.",
+    ['mission_1_msg_text_fail'] = "What? Is that even a valid version number?",
+    ['intro_msg_text_anon_obv'] = "Isn't it obvious that I have your number? lol.\n",
+    ['mission_1_msg_subtitle'] = "LifeInvader",
+    ['mission_1_msg_subtitle_re'] = "Re: LifeInvader",
+    ['mission_1_msg_text_start'] = "I need the OS version of the LifeInvader admin machine. Hurry.",
 }

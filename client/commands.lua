@@ -37,7 +37,7 @@ local function __ipAL(machine)
             "\tinet 127.0.0.1/8 scope host lo\n\t\tvalid_lft forever preferred_lft forever\n" ..
             "\tinet6 ::1/128 scope host\n\t\tvalid_lft forever preferred_lft forever\n" ..
 
-            "2: " .. machine.ip.interface .. ": <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc fq_codel state DOWN group default qlen 1000\n" ..
+            "2: " .. machine.ip.interface .. ": <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000\n" ..
             "\tlink/ether a1:e4:31:c9:10:4f brd ff:ff:ff:ff:ff:ff\n" ..
             "\tinet " .. machine.ip.address .. "/" .. machine.ip.subnet .. " brd " .. machine.ip.network .. " scope global dynamic noprefixroute " .. machine.ip.interface .. "\n\t\tvalid_lft 37214sec preferred_lft 37214sec"
 end

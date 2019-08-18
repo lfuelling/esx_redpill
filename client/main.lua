@@ -1,18 +1,12 @@
 ESX = nil
-Citizen.CreateThread(function()
-    while ESX == nil do
-        TriggerEvent('esx:getSharedObject', function(obj)
-            ESX = obj
-        end)
-        Citizen.Wait(0)
-    end
-end)
-
 local guiEnabled = false
 local isHacking = false
 local tutorialDone = false
 local phoneReady = false
 local numberAdded = false
+local firstMissionDone = false
+local firstMissionStarted = false
+local firstMissionIntroDone = false
 
 -- shows the GUI
 function EnableGui(enable, machineToHack)
@@ -56,6 +50,33 @@ AddEventHandler(eventNamespace .. omegaContact.namespace, function(anon, message
         ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle_wrong'), -- title, subtitle
                 responseMsg .. _U('intro_msg_text_fail'), -- message
                 "CHAR_OMEGA", 1) -- contact photo, symbol
+    end
+end)
+
+AddEventHandler('esx:onPlayerDeath', function()
+    if isHacking and not tutorialDone then
+        isHacking = false;
+    end
+end)
+
+RegisterNetEvent(eventNamespace .. blockedContact.namespace)
+AddEventHandler(eventNamespace .. blockedContact.namespace, function(anon, message)
+    local responseMsg = ""
+    if anon then
+        responseMsg = responseMsg .. _U('intro_msg_text_anon_obv')
+    end
+    if message == Locations.LifeInvader.AdminPc.machine.version then
+        ESX.ShowAdvancedNotification(blockedContact.name, _U('mission_1_msg_subtitle_re'), -- title, subtitle
+                responseMsg .. _U('mission_1_msg_text_final'), -- message
+                "CHAR_BLOCKED", 1) -- contact photo, symbol
+        Citizen.Wait(1500)
+        TriggerServerEvent(eventNamespace .. "advJob", 1)
+        Citizen.Wait(1500)
+        TriggerEvent('esx_phone:removeSpecialContact', blockedContact.number)
+    else
+        ESX.ShowAdvancedNotification(blockedContact.name, _U('mission_1_msg_subtitle_re'), -- title, subtitle
+                responseMsg .. _U('mission_1_msg_text_fail'), -- message
+                "CHAR_BLOCKED", 1) -- contact photo, symbol
     end
 end)
 
@@ -131,16 +152,25 @@ function drawGenericMarker(x, y, z)
             false) -- draw on intersecting
 end
 
+--- Checks if player is in first mission.
+-- @return true if job is hacker and rank is 0
+function isInFirstMission()
+    return ESX.GetPlayerData().job ~= NIL and
+            ESX.GetPlayerData().job.name == 'hacker' and
+            ESX.GetPlayerData().job.grade_name == 'noob'
+end
+
 -- mission logic
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
 
-        if ESX.GetPlayerData().job == 'hacker' and not isHacking then
+        if ESX.GetPlayerData().job ~= NIL and
+                ESX.GetPlayerData().job.name == 'hacker' and
+                not isHacking then
             isHacking = true
             tutorialDone = true
         end
-
         if isHacking then
             drawPcMarkers()
             if phoneReady and tutorialDone and not numberAdded then
@@ -185,7 +215,6 @@ end)
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-
         if isHacking then
             drawGenericMarker(Locations.CommRoom.Exit.x, Locations.CommRoom.Exit.y, Locations.CommRoom.Exit.z - 1.0001)
 
@@ -215,8 +244,29 @@ Citizen.CreateThread(function()
                     end
                 end
             end
+        end
+    end
+end)
 
-
+-- first mission logic
+Citizen.CreateThread(function()
+    if isInFirstMission() then
+        drawPcMarkers()
+        if (not numberAdded and not firstMissionDone) then
+            if not firstMissionStarted and math.random(0, 100) == 50 then
+                TriggerEvent('esx_phone:addSpecialContact', blockedContact.name, blockedContact.number, blockedContact.base64Icon)
+                numberAdded = true
+                firstMissionStarted = true
+            elseif firstMissionStarted then
+                TriggerEvent('esx_phone:addSpecialContact', blockedContact.name, blockedContact.number, blockedContact.base64Icon)
+                numberAdded = true
+            end
+        end
+        if firstMissionStarted and not firstMissionDone and not firstMissionIntroDone then
+            ESX.ShowAdvancedNotification(blockedContact.name, _U('mission_1_msg_subtitle'), -- title, subtitle
+                    _U('mission_1_msg_text_start'), -- message
+                    "CHAR_BLOCKED", 1) -- contact photo, symbol
+            firstMissionIntroDone = true
         end
     end
 end)
