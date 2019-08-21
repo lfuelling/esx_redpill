@@ -4,7 +4,7 @@ Hacking minigame(/mission/job) featuring proper terminals with some sort of UNIX
 
 - **Work in progress! Expect bugs, never use `master`!**
 - **If you fork this, you won't get updates.** 
-    - **Consider Starring if you don't want to make a contribution.**
+    - **Consider Starring instead if you don't want to make a contribution.**
 
 ## Dependencies
 
