@@ -2,7 +2,9 @@
 
 Hacking minigame(/mission/job) featuring proper terminals with some sort of UNIX(-like) stuff running on them.
 
-**Work in progress! Expect bugs, never use `master`!**
+- **Work in progress! Expect bugs, never use `master`!**
+- **If you fork this, you won't get updates.** 
+    - **Consider Starring if you don't want to make a contribution.**
 
 ## Dependencies
 
@@ -10,7 +12,7 @@ Hacking minigame(/mission/job) featuring proper terminals with some sort of UNIX
 - [esx_drugfarms](https://github.com/lfuelling/esx_drugfarms/)
 - [es_extended](https://github.com/ESX-Org/es_extended)
 - [esx_phone](https://github.com/ESX-Org/esx_phone)
-- [esx_phone](https://github.com/ESX-Org/esx_jobs)
+- [esx_jobs](https://github.com/ESX-Org/esx_jobs)
 - [Peds](https://github.com/SFL-Master/Peds) (optional, recommended)
 
 ## Installation
