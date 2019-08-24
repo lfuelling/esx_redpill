@@ -115,8 +115,24 @@ Citizen.CreateThread(function()
 end)
 
 --- Tutorial logic
+Citizen.CreateThread(_tutorialLoop)
+
+--- first mission logic
+Citizen.CreateThread(_firstMissionLoop)
+
+--- Marker logic
 Citizen.CreateThread(function()
-    while not tutorialFinished do
+    while true do
+        Citizen.Wait(0)
+        if isHacking or isHacker() then
+            drawPcMarkers()
+        end
+    end
+end)
+
+--- Loop for the tutorial
+function _tutorialLoop()
+    while true do
         Citizen.Wait(0)
         if isHacking then
             if phoneReady and not tutorialDone and not numberAdded then
@@ -161,10 +177,10 @@ Citizen.CreateThread(function()
             tutorialFinished = true
         end
     end
-end)
+end
 
---- first mission logic
-Citizen.CreateThread(function()
+--- Loop for the first mission
+function _firstMissionLoop()
     while true do
         Citizen.Wait(0)
         if (not numberAdded and not firstMissionDone) then
@@ -183,18 +199,5 @@ Citizen.CreateThread(function()
                     "CHAR_BLOCKED", 1) -- contact photo, symbol
             firstMissionIntroDone = true
         end
-        if isInSecondMission() then
-            break
-        end
     end
-end)
-
---- Marker logic
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-        if isHacking or isHacker() then
-            drawPcMarkers()
-        end
-    end
-end)
+end
