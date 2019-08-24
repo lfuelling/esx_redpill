@@ -22,6 +22,7 @@ files {
 }
 
 client_scripts {
+    'client/functions.lua',
     '@es_extended/locale.lua',
     'locales/en.lua',
     'config.lua',

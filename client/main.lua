@@ -8,7 +8,8 @@ local firstMissionDone = false
 local firstMissionStarted = false
 local firstMissionIntroDone = false
 
--- shows the GUI
+--- Shows the GUI
+-- Not extracted to functions.lua because it uses local vars
 function EnableGui(enable, machineToHack)
     SetNuiFocus(enable)
     guiEnabled = enable
@@ -20,15 +21,18 @@ function EnableGui(enable, machineToHack)
     })
 end
 
+--- Event handler for tutorial completion
 AddEventHandler(eventNamespace .. "tutorialDone", function()
     tutorialDone = true
 end)
 
+--- Event handler for esx_phone initialization
 RegisterNetEvent('esx_phone:loaded')
 AddEventHandler('esx_phone:loaded', function(phoneNumber, contacts)
     phoneReady = true
 end)
 
+--- Event handler for a message sent to omega (tutorial)
 RegisterNetEvent(eventNamespace .. omegaContact.namespace)
 AddEventHandler(eventNamespace .. omegaContact.namespace, function(anon, message)
     local responseMsg = ""
@@ -53,12 +57,14 @@ AddEventHandler(eventNamespace .. omegaContact.namespace, function(anon, message
     end
 end)
 
+--- Event handler for player death
 AddEventHandler('esx:onPlayerDeath', function()
     if isHacking and not tutorialDone then
         isHacking = false;
     end
 end)
 
+--- Event handler for messages sent to the blocked contact (first mission)
 RegisterNetEvent(eventNamespace .. blockedContact.namespace)
 AddEventHandler(eventNamespace .. blockedContact.namespace, function(anon, message)
     local responseMsg = ""
@@ -66,13 +72,7 @@ AddEventHandler(eventNamespace .. blockedContact.namespace, function(anon, messa
         responseMsg = responseMsg .. _U('intro_msg_text_anon_obv')
     end
     if message == Locations.LifeInvader.AdminPc.machine.version then
-        ESX.ShowAdvancedNotification(blockedContact.name, _U('mission_1_msg_subtitle_re'), -- title, subtitle
-                responseMsg .. _U('mission_1_msg_text_final'), -- message
-                "CHAR_BLOCKED", 1) -- contact photo, symbol
-        Citizen.Wait(1500)
-        TriggerServerEvent(eventNamespace .. "advJob", 1)
-        Citizen.Wait(1500)
-        TriggerEvent('esx_phone:removeSpecialContact', blockedContact.number)
+        completeFirstMission()
     else
         ESX.ShowAdvancedNotification(blockedContact.name, _U('mission_1_msg_subtitle_re'), -- title, subtitle
                 responseMsg .. _U('mission_1_msg_text_fail'), -- message
@@ -80,10 +80,12 @@ AddEventHandler(eventNamespace .. blockedContact.namespace, function(anon, messa
     end
 end)
 
+--- NativeUI callback for quitting the PC UI
 RegisterNUICallback('escape', function(data)
     EnableGui(false, NIL)
 end)
 
+--- NativeUI callback for executing a command on a PC
 RegisterNUICallback('command', function(data)
     if data.command then
         SendNUIMessage({
@@ -98,6 +100,7 @@ RegisterNUICallback('command', function(data)
     end
 end)
 
+--- Thread to get the ESX object
 Citizen.CreateThread(function()
     while ESX == nil do
         TriggerEvent('esx:getSharedObject', function(obj)
@@ -107,77 +110,31 @@ Citizen.CreateThread(function()
     end
 end)
 
-function drawPcMarkers()
-    -- draw markers for all hackable pcs
-    for _, location in pairs(Locations) do
-        __drawPcMarkers(location)
-    end
-end
-
-function __drawPcMarkers(location)
-    if location.x ~= NIL then
-        -- some locations are not machines
-        if location.machine ~= NIL then
-            drawGenericMarker(location.x, location.y, location.z - 1.001)
-            if GetDistanceBetweenCoords(location.x, location.y, location.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
-                if IsControlJustPressed(1, 38) then
-                    EnableGui(true, location.machine)
-                else
-                    ESX.ShowHelpNotification(missionMarker.hint)
-                end
-            end
-        end
-    else
-        -- we need to go deeper
-        for _, l2 in pairs(location) do
-            if l2 ~= NIL then
-                __drawPcMarkers(l2)
-            end
-        end
-    end
-end
-
-function drawGenericMarker(x, y, z)
-    DrawMarker(1, x, y, z,
-            0, 0, 0, -- dir
-            0, 0, 0, -- rot
-            1.0, 1.0, 1.0, -- scale
-            0, 0, 240, 200, -- rgba
-            false, -- bob
-            false, -- face
-            2, -- p19
-            false, -- rotate
-            NULL, -- texture dict
-            NULL, -- texture name
-            false) -- draw on intersecting
-end
-
---- Checks if player is in first mission.
--- @return true if job is hacker and rank is 0
-function isInFirstMission()
-    return ESX.GetPlayerData().job ~= NIL and
-            ESX.GetPlayerData().job.name == 'hacker' and
-            ESX.GetPlayerData().job.grade_name == 'noob'
-end
-
--- mission logic
+--- Tutorial logic
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-
-        if ESX.GetPlayerData().job ~= NIL and
-                ESX.GetPlayerData().job.name == 'hacker' and
-                not isHacking then
-            isHacking = true
-            tutorialDone = true
-        end
         if isHacking then
-            drawPcMarkers()
-            if phoneReady and tutorialDone and not numberAdded then
+            if phoneReady and not tutorialDone and not numberAdded then
                 TriggerEvent('esx_phone:addSpecialContact', omegaContact.name, omegaContact.number, omegaContact.base64Icon)
                 numberAdded = true
             end
-        else
+            if not tutorialDone then
+                drawGenericMarker(Locations.CommRoom.Exit.x, Locations.CommRoom.Exit.y, Locations.CommRoom.Exit.z - 1.0001)
+
+                if GetDistanceBetweenCoords(Locations.CommRoom.Exit.x, Locations.CommRoom.Exit.y, Locations.CommRoom.Exit.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
+                    if IsControlJustPressed(1, 38) then
+                        finishTutorial(tutorialDone)
+                    else
+                        if tutorialDone then
+                            ESX.ShowHelpNotification(_U('press_interact_to_exit'))
+                        else
+                            ESX.ShowHelpNotification(_U('press_interact_to_quit'))
+                        end
+                    end
+                end
+            end
+        else -- if not hacking
             if numberAdded then
                 TriggerEvent('esx_phone:removeSpecialContact', omegaContact.number)
                 numberAdded = false
@@ -189,20 +146,7 @@ Citizen.CreateThread(function()
 
             if GetDistanceBetweenCoords(Locations.RedpillMarker.Entry.x, Locations.RedpillMarker.Entry.y, Locations.RedpillMarker.Entry.z, GetEntityCoords(GetPlayerPed(-1), true)) < 7 then
                 if GetDistanceBetweenCoords(Locations.RedpillMarker.Entry.x, Locations.RedpillMarker.Entry.y, Locations.RedpillMarker.Entry.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
-                    Citizen.Wait(2000) -- wait for elevator doors
-                    DoScreenFadeOut(1000)
-                    Citizen.Wait(500)
-                    SetEntityCoords(GetPlayerPed(-1), Locations.CommRoom.Entry.x, Locations.CommRoom.Entry.y, Locations.CommRoom.Entry.z, Locations.CommRoom.Entry.hdg)
-                    DoScreenFadeIn(1000)
-                    isHacking = true
-                    Citizen.Wait(500)
-                    ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle1'), -- title, subtitle
-                            _U('intro_msg_text1'), -- message
-                            "CHAR_OMEGA", 1) -- contact photo, symbol
-                    Citizen.Wait(4000) -- give the user time to read
-                    ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle2'), -- title, subtitle
-                            _U('intro_msg_text2'), -- message
-                            "CHAR_OMEGA", 1) -- contact photo, symbol
+                    startTutorial()
                 else
                     ESX.ShowHelpNotification(_U('intro_help_text'))
                 end
@@ -211,62 +155,37 @@ Citizen.CreateThread(function()
     end
 end)
 
--- intro/tutorial logic
+--- first mission logic
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        if isHacking then
-            drawGenericMarker(Locations.CommRoom.Exit.x, Locations.CommRoom.Exit.y, Locations.CommRoom.Exit.z - 1.0001)
-
-            if GetDistanceBetweenCoords(Locations.CommRoom.Exit.x, Locations.CommRoom.Exit.y, Locations.CommRoom.Exit.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
-                if IsControlJustPressed(1, 38) then
-                    DoScreenFadeOut(1000)
-                    Citizen.Wait(500)
-                    SetEntityCoords(GetPlayerPed(-1), Locations.RedpillMarker.Exit.x, Locations.RedpillMarker.Exit.y, Locations.RedpillMarker.Exit.z)
-                    DoScreenFadeIn(1000)
-                    Citizen.Wait(1500)
-                    if tutorialDone then
-                        ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle_done'), -- title, subtitle
-                                _U('intro_msg_text_done'), -- message
-                                "CHAR_OMEGA", 1) -- contact photo, symbol
-                    else
-                        isHacking = false
-                        Citizen.Wait(500)
-                        ESX.ShowAdvancedNotification(omegaContact.name, _U('intro_msg_subtitle_quit'), -- title, subtitle
-                                _U('intro_msg_text_quit'), -- message
-                                "CHAR_OMEGA", 1) -- contact photo, symbol
-                    end
-                else
-                    if tutorialDone then
-                        ESX.ShowHelpNotification(_U('press_interact_to_exit'))
-                    else
-                        ESX.ShowHelpNotification(_U('press_interact_to_quit'))
-                    end
+        if isInFirstMission() then
+            if (not numberAdded and not firstMissionDone) then
+                if not firstMissionStarted and math.random(0, 100) == 50 then
+                    TriggerEvent('esx_phone:addSpecialContact', blockedContact.name, blockedContact.number, blockedContact.base64Icon)
+                    numberAdded = true
+                    firstMissionStarted = true
+                elseif firstMissionStarted then
+                    TriggerEvent('esx_phone:addSpecialContact', blockedContact.name, blockedContact.number, blockedContact.base64Icon)
+                    numberAdded = true
                 end
+            end
+            if firstMissionStarted and not firstMissionDone and not firstMissionIntroDone then
+                ESX.ShowAdvancedNotification(blockedContact.name, _U('mission_1_msg_subtitle'), -- title, subtitle
+                        _U('mission_1_msg_text_start'), -- message
+                        "CHAR_BLOCKED", 1) -- contact photo, symbol
+                firstMissionIntroDone = true
             end
         end
     end
 end)
 
--- first mission logic
+--- Marker logic
 Citizen.CreateThread(function()
-    if isInFirstMission() then
-        drawPcMarkers()
-        if (not numberAdded and not firstMissionDone) then
-            if not firstMissionStarted and math.random(0, 100) == 50 then
-                TriggerEvent('esx_phone:addSpecialContact', blockedContact.name, blockedContact.number, blockedContact.base64Icon)
-                numberAdded = true
-                firstMissionStarted = true
-            elseif firstMissionStarted then
-                TriggerEvent('esx_phone:addSpecialContact', blockedContact.name, blockedContact.number, blockedContact.base64Icon)
-                numberAdded = true
-            end
-        end
-        if firstMissionStarted and not firstMissionDone and not firstMissionIntroDone then
-            ESX.ShowAdvancedNotification(blockedContact.name, _U('mission_1_msg_subtitle'), -- title, subtitle
-                    _U('mission_1_msg_text_start'), -- message
-                    "CHAR_BLOCKED", 1) -- contact photo, symbol
-            firstMissionIntroDone = true
+    while true do
+        Citizen.Wait(0)
+        if isHacking or isHacker() then
+            drawPcMarkers()
         end
     end
 end)

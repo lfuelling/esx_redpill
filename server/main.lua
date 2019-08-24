@@ -1,9 +1,11 @@
 ESX = nil
 
+--- Event listener for getting the ESX object
 TriggerEvent('esx:getSharedObject', function(obj)
     ESX = obj
 end)
 
+--- Event listener for a message sent to a phone
 RegisterNetEvent('esx_phone:send')
 AddEventHandler('esx_phone:send', function(phoneNumber, message, anon, position)
     if phoneNumber == omegaContact.number then
@@ -13,6 +15,7 @@ AddEventHandler('esx_phone:send', function(phoneNumber, message, anon, position)
     end
 end)
 
+--- Event listener for setting the job
 RegisterNetEvent(eventNamespace .. "setJob")
 AddEventHandler(eventNamespace .. "setJob", function(isHacker)
     if isHacker then
@@ -22,6 +25,7 @@ AddEventHandler(eventNamespace .. "setJob", function(isHacker)
     end
 end)
 
+--- Event listener to advence in the job
 RegisterNetEvent(eventNamespace .. "advJob")
 AddEventHandler(eventNamespace .. "advJob", function(level)
     if level > 0 then
