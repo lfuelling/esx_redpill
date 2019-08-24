@@ -2,6 +2,7 @@ ESX = nil
 local guiEnabled = false
 local isHacking = false
 local tutorialDone = false
+local tutorialFinished = false
 local phoneReady = false
 local numberAdded = false
 local firstMissionDone = false
@@ -62,6 +63,9 @@ AddEventHandler('esx:onPlayerDeath', function()
     if isHacking and not tutorialDone then
         isHacking = false;
     end
+    if tutorialFinished and not isHacker() then
+        tutorialFinished = false
+    end
 end)
 
 --- Event handler for messages sent to the blocked contact (first mission)
@@ -112,7 +116,7 @@ end)
 
 --- Tutorial logic
 Citizen.CreateThread(function()
-    while true do
+    while not tutorialFinished do
         Citizen.Wait(0)
         if isHacking then
             if phoneReady and not tutorialDone and not numberAdded then
@@ -134,7 +138,8 @@ Citizen.CreateThread(function()
                     end
                 end
             end
-        else -- if not hacking
+        else
+            -- if not hacking
             if numberAdded then
                 TriggerEvent('esx_phone:removeSpecialContact', omegaContact.number)
                 numberAdded = false
@@ -152,6 +157,9 @@ Citizen.CreateThread(function()
                 end
             end
         end
+        if isHacker() then
+            tutorialFinished = true
+        end
     end
 end)
 
@@ -159,23 +167,24 @@ end)
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        if isInFirstMission() then
-            if (not numberAdded and not firstMissionDone) then
-                if not firstMissionStarted and math.random(0, 100) == 50 then
-                    TriggerEvent('esx_phone:addSpecialContact', blockedContact.name, blockedContact.number, blockedContact.base64Icon)
-                    numberAdded = true
-                    firstMissionStarted = true
-                elseif firstMissionStarted then
-                    TriggerEvent('esx_phone:addSpecialContact', blockedContact.name, blockedContact.number, blockedContact.base64Icon)
-                    numberAdded = true
-                end
+        if (not numberAdded and not firstMissionDone) then
+            if not firstMissionStarted and math.random(0, 100) == 50 then
+                TriggerEvent('esx_phone:addSpecialContact', blockedContact.name, blockedContact.number, blockedContact.base64Icon)
+                numberAdded = true
+                firstMissionStarted = true
+            elseif firstMissionStarted then
+                TriggerEvent('esx_phone:addSpecialContact', blockedContact.name, blockedContact.number, blockedContact.base64Icon)
+                numberAdded = true
             end
-            if firstMissionStarted and not firstMissionDone and not firstMissionIntroDone then
-                ESX.ShowAdvancedNotification(blockedContact.name, _U('mission_1_msg_subtitle'), -- title, subtitle
-                        _U('mission_1_msg_text_start'), -- message
-                        "CHAR_BLOCKED", 1) -- contact photo, symbol
-                firstMissionIntroDone = true
-            end
+        end
+        if firstMissionStarted and not firstMissionDone and not firstMissionIntroDone then
+            ESX.ShowAdvancedNotification(blockedContact.name, _U('mission_1_msg_subtitle'), -- title, subtitle
+                    _U('mission_1_msg_text_start'), -- message
+                    "CHAR_BLOCKED", 1) -- contact photo, symbol
+            firstMissionIntroDone = true
+        end
+        if isInSecondMission() then
+            break
         end
     end
 end)
