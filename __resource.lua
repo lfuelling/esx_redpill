@@ -2,7 +2,7 @@ resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
 
 description 'ESX Hacking Mission/Job'
 
-version '0.0.2'
+version '0.0.3'
 
 dependency 'bob74_ipl'
 dependency 'es_extended'
@@ -22,6 +22,7 @@ files {
 }
 
 client_scripts {
+    'client/functions.lua',
     '@es_extended/locale.lua',
     'locales/en.lua',
     'config.lua',
