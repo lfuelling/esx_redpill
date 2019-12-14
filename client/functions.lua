@@ -37,12 +37,14 @@ function __drawPcMarkers(location)
     if location.x ~= NIL then
         -- some locations are not machines
         if location.machine ~= NIL then
-            drawGenericMarker(location.x, location.y, location.z - 1.001)
-            if GetDistanceBetweenCoords(location.x, location.y, location.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
-                if IsControlJustPressed(1, 38) then
-                    EnableGui(true, location.machine)
-                else
-                    ESX.ShowHelpNotification(missionMarker.hint)
+            if GetDistanceBetweenCoords(location.x, location.y, location.z, GetEntityCoords(GetPlayerPed(-1), true)) < 200 then
+                drawGenericMarker(location.x, location.y, location.z - 1.001)
+                if GetDistanceBetweenCoords(location.x, location.y, location.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
+                    if IsControlJustPressed(1, 38) then
+                        EnableGui(true, location.machine)
+                    else
+                        ESX.ShowHelpNotification(missionMarker.hint)
+                    end
                 end
             end
         end
