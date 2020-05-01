@@ -1,4 +1,4 @@
-USE `essentialmode`;
+USE `es_extended`;
 
 INSERT INTO `jobs` (name, label)
 VALUES ('hacker', 'Hacker')
