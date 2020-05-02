@@ -11,9 +11,9 @@ VALUES ('hacker', 0, 'noob', 'N00b', 20, '{}', '{}'),
        ('hacker', 3, 'boss', 'The Oracle', 80, '{}', '{}')
 ;
 
-INSERT INTO `items` (name, label, `limit`)
-VALUES ('usbdrive', 'USB Drive', 20),
-       ('sdcard', 'SD Card', 5)
+INSERT INTO `items` (name, label)
+VALUES ('usbdrive', 'USB Drive'),
+       ('sdcard', 'SD Card')
 ;
 
 -- comment this out if you don't use shops
