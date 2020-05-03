@@ -37,9 +37,9 @@ function __drawPcMarkers(location)
     if location.x ~= NIL then
         -- some locations are not machines
         if location.machine ~= NIL then
-            if GetDistanceBetweenCoords(location.x, location.y, location.z, GetEntityCoords(GetPlayerPed(-1), true)) < 200 then
+            if GetDistanceBetweenCoords(location.x, location.y, location.z, GetEntityCoords(PlayerPedId(), true)) < 200 then
                 drawGenericMarker(location.x, location.y, location.z - 1.001)
-                if GetDistanceBetweenCoords(location.x, location.y, location.z, GetEntityCoords(GetPlayerPed(-1), true)) < 2 then
+                if GetDistanceBetweenCoords(location.x, location.y, location.z, GetEntityCoords(PlayerPedId(), true)) < 2 then
                     if IsControlJustPressed(1, 38) then
                         EnableGui(true, location.machine)
                     else
@@ -79,7 +79,7 @@ function startTutorial()
     Citizen.Wait(2000) -- wait for elevator doors
     DoScreenFadeOut(1000)
     Citizen.Wait(500)
-    SetEntityCoords(GetPlayerPed(-1), Locations.CommRoom.Entry.x, Locations.CommRoom.Entry.y, Locations.CommRoom.Entry.z, Locations.CommRoom.Entry.hdg)
+    SetEntityCoords(PlayerPedId(), Locations.CommRoom.Entry.x, Locations.CommRoom.Entry.y, Locations.CommRoom.Entry.z, Locations.CommRoom.Entry.hdg)
     DoScreenFadeIn(1000)
     isHacking = true
     Citizen.Wait(500)
@@ -96,7 +96,7 @@ end
 function finishTutorial(tutorialDone)
     DoScreenFadeOut(1000)
     Citizen.Wait(500)
-    SetEntityCoords(GetPlayerPed(-1), Locations.RedpillMarker.Exit.x, Locations.RedpillMarker.Exit.y, Locations.RedpillMarker.Exit.z)
+    SetEntityCoords(PlayerPedId(), Locations.RedpillMarker.Exit.x, Locations.RedpillMarker.Exit.y, Locations.RedpillMarker.Exit.z)
     DoScreenFadeIn(1000)
     Citizen.Wait(1500)
     if tutorialDone then
