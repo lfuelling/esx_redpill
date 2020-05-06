@@ -23,14 +23,17 @@ files {
 }
 
 client_scripts {
-    'client/functions.lua',
     '@es_extended/locale.lua',
+    'client/functions.lua',
     'locales/en.lua',
     'config.lua',
     'client/locations.lua',
     'client/commands.lua',
     'res.lua',
     'client/main.lua',
+    'client/missions/tutorial.lua',
+    'client/missions/mission1.lua',
+    'client/missions/mission2.lua',
 }
 
 server_scripts {

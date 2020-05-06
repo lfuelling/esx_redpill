@@ -29,8 +29,12 @@ Locales['en'] = {
     ['life_invader_marker'] = "LifeInvader",
     ['mission_1_msg_text_final'] = "Good work.",
     ['mission_1_msg_text_fail'] = "What? Is that even a valid version number?",
-    ['intro_msg_text_anon_obv'] = "Isn't it obvious that I have your number? lol.\n",
+    ['intro_msg_text_anon_obv'] = "Hah, you think a blocked number works on me?\n",
     ['mission_1_msg_subtitle'] = "LifeInvader",
     ['mission_1_msg_subtitle_re'] = "Re: LifeInvader",
     ['mission_1_msg_text_start'] = "I need the OS version of the LifeInvader admin machine. Hurry.",
+    ['mission_2_msg_text_final'] = "I'm in, thanks.",
+    ['mission_2_msg_text_fail'] = "What? That can't be right. Check again!",
+    ['mission_2_msg_subtitle'] = "Re: LifeInvader",
+    ['mission_2_msg_text_start'] = "I managed to install a backdoor on one of the developer machines. Unfortunately I can't find out its IP to connect to it. The username is 'kevin', see if you can find it.",
 }
