@@ -56,5 +56,5 @@ end
 --- Checks if player is in third mission.
 -- @return true if job is hacker and rank is 2
 function isInThirdMission()
-    return isHacker() and ESX.GetPlayerData().job.grade_name == 'pentester'
+    return isHacker() and ESX.GetPlayerData().job.grade_name == 'developer'
 end
