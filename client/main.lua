@@ -114,12 +114,6 @@ Citizen.CreateThread(function()
     end
 end)
 
---- Tutorial logic
-Citizen.CreateThread(_tutorialLoop)
-
---- first mission logic
-Citizen.CreateThread(_firstMissionLoop)
-
 --- Marker logic
 Citizen.CreateThread(function()
     while true do
@@ -130,74 +124,76 @@ Citizen.CreateThread(function()
     end
 end)
 
---- Loop for the tutorial
-function _tutorialLoop()
-    while true do
-        Citizen.Wait(0)
-        if isHacking then
-            if phoneReady and not tutorialDone and not numberAdded then
-                TriggerEvent('esx_phone:addSpecialContact', omegaContact.name, omegaContact.number, omegaContact.base64Icon)
-                numberAdded = true
-            end
-            if not tutorialDone then
-                drawGenericMarker(Locations.CommRoom.Exit.x, Locations.CommRoom.Exit.y, Locations.CommRoom.Exit.z - 1.0001)
+function _tutorialLogic()
+    if isHacking then
+        if phoneReady and not tutorialDone and not numberAdded then
+            TriggerEvent('esx_phone:addSpecialContact', omegaContact.name, omegaContact.number, omegaContact.base64Icon)
+            numberAdded = true
+        end
+        if not tutorialDone then
+            drawGenericMarker(Locations.CommRoom.Exit.x, Locations.CommRoom.Exit.y, Locations.CommRoom.Exit.z - 1.0001)
 
-                if GetDistanceBetweenCoords(Locations.CommRoom.Exit.x, Locations.CommRoom.Exit.y, Locations.CommRoom.Exit.z, GetEntityCoords(PlayerPedId(), true)) < 2 then
-                    if IsControlJustPressed(1, 38) then
-                        finishTutorial(tutorialDone)
+            if GetDistanceBetweenCoords(Locations.CommRoom.Exit.x, Locations.CommRoom.Exit.y, Locations.CommRoom.Exit.z, GetEntityCoords(PlayerPedId(), true)) < 2 then
+                if IsControlJustPressed(1, 38) then
+                    finishTutorial(tutorialDone)
+                else
+                    if tutorialDone then
+                        ESX.ShowHelpNotification(_U('press_interact_to_exit'))
                     else
-                        if tutorialDone then
-                            ESX.ShowHelpNotification(_U('press_interact_to_exit'))
-                        else
-                            ESX.ShowHelpNotification(_U('press_interact_to_quit'))
-                        end
+                        ESX.ShowHelpNotification(_U('press_interact_to_quit'))
                     end
                 end
             end
-        else
-            -- if not hacking
-            if numberAdded then
-                TriggerEvent('esx_phone:removeSpecialContact', omegaContact.number)
-                numberAdded = false
-            end
-            if tutorialDone then
-                tutorialDone = false
-            end
-            drawGenericMarker(Locations.RedpillMarker.Entry.x, Locations.RedpillMarker.Entry.y, Locations.RedpillMarker.Entry.z - 1.001)
+        end
+    else
+        -- if not hacking
+        TriggerEvent('esx_phone:removeSpecialContact', omegaContact.number)
+        numberAdded = false
+        tutorialDone = false
+        tutorialFinished = false
+        drawGenericMarker(Locations.RedpillMarker.Entry.x, Locations.RedpillMarker.Entry.y, Locations.RedpillMarker.Entry.z - 1.001)
 
-            if GetDistanceBetweenCoords(Locations.RedpillMarker.Entry.x, Locations.RedpillMarker.Entry.y, Locations.RedpillMarker.Entry.z, GetEntityCoords(PlayerPedId(), true)) < 7 then
-                if GetDistanceBetweenCoords(Locations.RedpillMarker.Entry.x, Locations.RedpillMarker.Entry.y, Locations.RedpillMarker.Entry.z, GetEntityCoords(PlayerPedId(), true)) < 2 then
-                    startTutorial()
-                else
-                    ESX.ShowHelpNotification(_U('intro_help_text'))
-                end
+        if GetDistanceBetweenCoords(Locations.RedpillMarker.Entry.x, Locations.RedpillMarker.Entry.y, Locations.RedpillMarker.Entry.z, GetEntityCoords(PlayerPedId(), true)) < 7 then
+            if GetDistanceBetweenCoords(Locations.RedpillMarker.Entry.x, Locations.RedpillMarker.Entry.y, Locations.RedpillMarker.Entry.z, GetEntityCoords(PlayerPedId(), true)) < 2 then
+                startTutorial()
+            else
+                ESX.ShowHelpNotification(_U('intro_help_text'))
             end
         end
-        if isHacker() then
-            tutorialFinished = true
-        end
+    end
+    if isHacker() then
+        tutorialFinished = true
     end
 end
 
---- Loop for the first mission
-function _firstMissionLoop()
+function _firstMissionLogic()
+    if (not numberAdded and not firstMissionDone) then
+        if not firstMissionStarted and math.random(0, 100) == 50 then
+            TriggerEvent('esx_phone:addSpecialContact', blockedContact.name, blockedContact.number, blockedContact.base64Icon)
+            numberAdded = true
+            firstMissionStarted = true
+        elseif firstMissionStarted then
+            TriggerEvent('esx_phone:addSpecialContact', blockedContact.name, blockedContact.number, blockedContact.base64Icon)
+            numberAdded = true
+        end
+    end
+    if firstMissionStarted and not firstMissionDone and not firstMissionIntroDone then
+        ESX.ShowAdvancedNotification(blockedContact.name, _U('mission_1_msg_subtitle'), -- title, subtitle
+                _U('mission_1_msg_text_start'), -- message
+                "CHAR_BLOCKED", 1) -- contact photo, symbol
+        firstMissionIntroDone = true
+    end
+end
+
+Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        if (not numberAdded and not firstMissionDone) then
-            if not firstMissionStarted and math.random(0, 100) == 50 then
-                TriggerEvent('esx_phone:addSpecialContact', blockedContact.name, blockedContact.number, blockedContact.base64Icon)
-                numberAdded = true
-                firstMissionStarted = true
-            elseif firstMissionStarted then
-                TriggerEvent('esx_phone:addSpecialContact', blockedContact.name, blockedContact.number, blockedContact.base64Icon)
-                numberAdded = true
-            end
-        end
-        if firstMissionStarted and not firstMissionDone and not firstMissionIntroDone then
-            ESX.ShowAdvancedNotification(blockedContact.name, _U('mission_1_msg_subtitle'), -- title, subtitle
-                    _U('mission_1_msg_text_start'), -- message
-                    "CHAR_BLOCKED", 1) -- contact photo, symbol
-            firstMissionIntroDone = true
+        if not isHacker() then
+            _tutorialLogic()
+        elseif isHacker() and not firstMissionDone then
+            _firstMissionLogic()
+        else
+            Citizen.Wait(20000) -- wait 20 secs
         end
     end
-end
+end)
