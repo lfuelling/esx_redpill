@@ -40,3 +40,20 @@ function _secondMissionLogic()
         secondMissionIntroDone = true
     end
 end
+
+--- Completes the second mission and advances the job rank
+function completeSecondMission()
+    ESX.ShowAdvancedNotification(blockedContact.name, _U('mission_2_msg_subtitle'), -- title, subtitle
+            responseMsg .. _U('mission_2_msg_text_final'), -- message
+            "CHAR_BLOCKED", 1) -- contact photo, symbol
+    Citizen.Wait(1500)
+    TriggerServerEvent(eventNamespace .. "advJob", 2)
+    Citizen.Wait(1500)
+    TriggerEvent('esx_phone:removeSpecialContact', blockedContact.number)
+end
+
+--- Checks if player is in second mission.
+-- @return true if job is hacker and rank is 1
+function isInSecondMission()
+    return isHacker() and ESX.GetPlayerData().job.grade_name == 'scriptkid'
+end

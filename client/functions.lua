@@ -1,46 +1,8 @@
---- Checks if player is in first mission.
--- @return true if job is hacker and rank is 0
-function isInFirstMission()
-    return ESX.GetPlayerData().job ~= NIL and
-            ESX.GetPlayerData().job.name == 'hacker' and
-            ESX.GetPlayerData().job.grade_name == 'noob'
-end
-
---- Checks if player is in second mission.
--- @return true if job is hacker and rank is 1
-function isInSecondMission()
-    return ESX.GetPlayerData().job ~= NIL and
-            ESX.GetPlayerData().job.name == 'hacker' and
-            ESX.GetPlayerData().job.grade_name == 'scriptkid'
-end
-
 --- Checks if player has "Hacker" job.
 -- @return true if player has hacker job
 function isHacker()
     return ESX.GetPlayerData().job ~= NIL and
             ESX.GetPlayerData().job.name == 'hacker'
-end
-
---- Completes the first mission and advances the job rank
-function completeFirstMission()
-    ESX.ShowAdvancedNotification(blockedContact.name, _U('mission_1_msg_subtitle_re'), -- title, subtitle
-            responseMsg .. _U('mission_1_msg_text_final'), -- message
-            "CHAR_BLOCKED", 1) -- contact photo, symbol
-    Citizen.Wait(1500)
-    TriggerServerEvent(eventNamespace .. "advJob", 1)
-    Citizen.Wait(1500)
-    TriggerEvent('esx_phone:removeSpecialContact', blockedContact.number)
-end
-
---- Completes the second mission and advances the job rank
-function completeSecondMission()
-    ESX.ShowAdvancedNotification(blockedContact.name, _U('mission_2_msg_subtitle'), -- title, subtitle
-            responseMsg .. _U('mission_2_msg_text_final'), -- message
-            "CHAR_BLOCKED", 1) -- contact photo, symbol
-    Citizen.Wait(1500)
-    TriggerServerEvent(eventNamespace .. "advJob", 2)
-    Citizen.Wait(1500)
-    TriggerEvent('esx_phone:removeSpecialContact', blockedContact.number)
 end
 
 --- Draws the markers for all PC locations.
