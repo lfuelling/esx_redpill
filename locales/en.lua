@@ -40,4 +40,10 @@ Locales['en'] = {
     ['mission_2_msg_text_fail'] = "What? That can't be right. Check again!",
     ['mission_2_msg_subtitle'] = "Re: LifeInvader",
     ['mission_2_msg_text_start'] = "I managed to install a backdoor on one of the developer machines. Unfortunately I can't find out its IP to connect to it. The username is 'kevin', see if you can find it.",
+
+    ['mission_3_msg_text_final'] = "Good, now let's see what we'll get out of this...",
+    ['mission_3_msg_text_fail'] = "Oh come on, can you even read?",
+    ['mission_3_msg_subtitle'] = "Pacific Standard",
+    ['mission_3_msg_subtitle_re'] = "Re: Pacific Standard",
+    ['mission_3_msg_text_start'] = "Hi there. I heard that you know your way around computers. I want to spy the vault combination of the Pacific Standard by using the microphone of a PC nearby. To allow my worm to find the correct host, I need the IP address. GO!",
 }
