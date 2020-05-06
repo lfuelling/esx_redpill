@@ -8,6 +8,7 @@ local numberAdded = false
 local firstMissionDone = false
 local firstMissionStarted = false
 local firstMissionIntroDone = false
+local nextMissionTrigger = nil
 
 --- Shows the GUI
 -- Not extracted to functions.lua because it uses local vars
@@ -151,6 +152,7 @@ function _tutorialLogic()
         numberAdded = false
         tutorialDone = false
         tutorialFinished = false
+        nextMissionTrigger = nil
         drawGenericMarker(Locations.RedpillMarker.Entry.x, Locations.RedpillMarker.Entry.y, Locations.RedpillMarker.Entry.z - 1.001)
 
         if GetDistanceBetweenCoords(Locations.RedpillMarker.Entry.x, Locations.RedpillMarker.Entry.y, Locations.RedpillMarker.Entry.z, GetEntityCoords(PlayerPedId(), true)) < 7 then
@@ -163,12 +165,13 @@ function _tutorialLogic()
     end
     if isHacker() then
         tutorialFinished = true
+        nextMissionTrigger = os.time(os.date("!*t")) + math.random(30, 300);
     end
 end
 
 function _firstMissionLogic()
     if (not numberAdded and not firstMissionDone) then
-        if not firstMissionStarted and math.random(0, 100) == 50 then
+        if not firstMissionStarted and not nextMissionTrigger == nil and os.time(os.date("!*t")) >= nextMissionTrigger then
             TriggerEvent('esx_phone:addSpecialContact', blockedContact.name, blockedContact.number, blockedContact.base64Icon)
             numberAdded = true
             firstMissionStarted = true
