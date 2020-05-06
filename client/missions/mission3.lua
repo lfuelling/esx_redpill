@@ -22,7 +22,7 @@ AddEventHandler(eventNamespace .. blockedContact.namespace, function(anon, messa
     end
 end)
 
-function _secondMissionLogic()
+function _thirdMissionLogic()
     if (not numberAdded and not thirdMissionDone) then
         if not thirdMissionStarted then
             TriggerEvent('esx_phone:addSpecialContact', blockedContact.name, blockedContact.number, blockedContact.base64Icon)
@@ -50,6 +50,7 @@ function completeThirdMission()
     TriggerServerEvent(eventNamespace .. "advJob", 3)
     Citizen.Wait(1500)
     TriggerEvent('esx_phone:removeSpecialContact', blockedContact.number)
+    TriggerEvent(eventNamespace .. "getNextTriggerTime")
 end
 
 --- Checks if player is in third mission.

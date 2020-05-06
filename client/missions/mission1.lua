@@ -50,6 +50,7 @@ function completeFirstMission()
     TriggerServerEvent(eventNamespace .. "advJob", 1)
     Citizen.Wait(1500)
     TriggerEvent('esx_phone:removeSpecialContact', blockedContact.number)
+    TriggerEvent(eventNamespace .. "getNextTriggerTime")
 end
 
 --- Checks if player is in first mission.

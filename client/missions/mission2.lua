@@ -50,6 +50,7 @@ function completeSecondMission()
     TriggerServerEvent(eventNamespace .. "advJob", 2)
     Citizen.Wait(1500)
     TriggerEvent('esx_phone:removeSpecialContact', blockedContact.number)
+    TriggerEvent(eventNamespace .. "getNextTriggerTime")
 end
 
 --- Checks if player is in second mission.

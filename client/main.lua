@@ -81,6 +81,8 @@ Citizen.CreateThread(function()
             _firstMissionLogic()
         elseif isInSecondMission() and timeForNextMission() then
             _secondMissionLogic()
+        elseif isInThirdMission() and timeForNextMission() then
+            _thirdMissionLogic()
         else
             Citizen.Wait(20000) -- wait 20 secs
         end

@@ -82,5 +82,6 @@ function _tutorialLogic()
     end
     if isHacker() then
         tutorialFinished = true
+        TriggerEvent(eventNamespace .. "getNextTriggerTime")
     end
 end
