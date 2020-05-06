@@ -46,4 +46,10 @@ Locales['en'] = {
     ['mission_3_msg_subtitle'] = "Pacific Standard",
     ['mission_3_msg_subtitle_re'] = "Re: Pacific Standard",
     ['mission_3_msg_text_start'] = "Hi there. I heard that you know your way around computers. I want to spy the vault combination of the Pacific Standard by using the microphone of a PC nearby. To allow my worm to find the correct host, I need the IP address. GO!",
+
+    ['mission_4_msg_text_final'] = "Great, I didn't expect this to work!",
+    ['mission_4_msg_text_fail'] = "Nope, that one didn't work...",
+    ['mission_4_msg_subtitle'] = "Free Real Estate",
+    ['mission_4_msg_subtitle_re'] = "Re: Free Real Estate",
+    ['mission_4_msg_text_start'] = "When I was at the bank for consultation a few weeks back, I noticed that an employee can simply change the price of anything the bank sells. I want this nice house, you know what I'm planning. I managed to memorize the password, but I don't know the username to log into the computer remotely. I only know the PC had the number '1-1-1' labelled on it.",
 }

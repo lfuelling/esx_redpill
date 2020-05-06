@@ -35,6 +35,7 @@ client_scripts {
     'client/missions/mission1.lua',
     'client/missions/mission2.lua',
     'client/missions/mission3.lua',
+    'client/missions/mission4.lua',
 }
 
 server_scripts {
