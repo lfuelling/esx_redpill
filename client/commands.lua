@@ -63,7 +63,7 @@ local function __cat(machine, command)
         if command == 'cat ' .. file.path then
             if file.action ~= NIL then
                 -- some files trigger events
-                TriggerEvent("term:" .. file.action)
+                TriggerEvent(eventNamespace .. file.action)
             end
             return file.content
         end
