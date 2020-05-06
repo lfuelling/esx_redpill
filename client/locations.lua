@@ -135,7 +135,7 @@ Locations = {
         OfficePc = { x = 247.42, y = 208.71, z = 110.28,
                      machine = {
                          hostname = "0-1-3",
-                         user = "user",
+                         user = "tderouven",
                          version = "1.0.0-01",
                          ip = { address = "191.168.200.104", subnet = "24", network = "192.168.200.0", interface = "enp0s1" },
                          commands = { "echo", "ip", "uname" }
@@ -144,7 +144,7 @@ Locations = {
         BackOfficePc1 = { x = 261.2, y = 204.95, z = 110.29,
                           machine = {
                               hostname = "1-1-1",
-                              user = "user",
+                              user = "jsmith",
                               version = "1.0.0-01",
                               ip = { address = "191.168.200.106", subnet = "24", network = "192.168.200.0", interface = "enp0s1" },
                               commands = { "echo", "ip", "uname" }
@@ -153,7 +153,7 @@ Locations = {
         BackOfficePc2 = { x = 264.42, y = 211.12, z = 110.29,
                           machine = {
                               hostname = "1-1-2",
-                              user = "user",
+                              user = "rando",
                               version = "1.0.0-01",
                               ip = { address = "191.168.200.112", subnet = "24", network = "192.168.200.0", interface = "enp0s1" },
                               commands = { "echo", "ip", "uname" }
@@ -162,7 +162,7 @@ Locations = {
         VaultPc = { x = 264.82, y = 219.85, z = 101.68,
                     machine = {
                         hostname = "0-0-1",
-                        user = "user",
+                        user = "mlevins",
                         version = "1.0.0-01",
                         ip = { address = "191.168.200.102", subnet = "24", network = "192.168.200.0", interface = "enp0s1" },
                         commands = { "echo", "ip", "uname" }
