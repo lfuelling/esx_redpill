@@ -11,7 +11,7 @@ AddEventHandler(eventNamespace .. blockedContact.namespace, function(anon, messa
         if anon then
             responseMsg = responseMsg .. _U('intro_msg_text_anon_obv')
         end
-        if message == Locations.LifeInvader.DevPc.ip.address then
+        if message == Locations.LifeInvader.DevPc.machine.ip.address then
             completeSecondMission()
             secondMissionDone = true;
         else

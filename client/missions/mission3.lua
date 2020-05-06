@@ -11,7 +11,7 @@ AddEventHandler(eventNamespace .. blockedContact.namespace, function(anon, messa
         if anon then
             responseMsg = responseMsg .. _U('intro_msg_text_anon_obv')
         end
-        if message == Locations.Bank.VaultPc.ip.address then
+        if message == Locations.Bank.VaultPc.machine.ip.address then
             completeThirdMission()
             thirdMissionDone = true;
         else
