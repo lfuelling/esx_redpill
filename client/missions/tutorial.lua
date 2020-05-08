@@ -49,7 +49,7 @@ function _tutorialLogic()
             TriggerEvent('esx_phone:addSpecialContact', omegaContact.name, omegaContact.number, omegaContact.base64Icon)
             numberAdded = true
         end
-        if not tutorialDone then
+        if not isHacker() then
             drawGenericMarker(Locations.CommRoom.Exit.x, Locations.CommRoom.Exit.y, Locations.CommRoom.Exit.z - 1.0001)
 
             if GetDistanceBetweenCoords(Locations.CommRoom.Exit.x, Locations.CommRoom.Exit.y, Locations.CommRoom.Exit.z, GetEntityCoords(PlayerPedId(), true)) < 2 then
