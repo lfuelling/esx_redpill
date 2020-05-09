@@ -168,4 +168,76 @@ Locations = {
                         commands = { "echo", "ip", "uname" }
                     }
         },
-    } }
+    },
+    Zancudo = {
+        TowerFrontOffice01 = {
+            x = -2364.49, y = 3245.38, z = 92.9,
+            machine = {
+                hostname = "towercntrl01",
+                user = "ltjones",
+                version = "1.0.1-08-mil",
+                ip = { address = "10.10.200.11", subnet = "8", network = "10.0.0.0", interface = "enp4s3" },
+                files = {
+                    { path = "/home/ltjones/flights.txt", content = _U('flights_file_content'), action = nil }
+                },
+                commands = { "echo", "ip", "uname", "cat" }
+            }
+        },
+        TowerFrontOffice02 = {
+            x = -2358.16, y = 3241.84, z = 92.9,
+            machine = {
+                hostname = "towercntrl02",
+                user = "cptburke",
+                version = "1.0.1-08-mil",
+                ip = { address = "10.10.200.12", subnet = "8", network = "10.0.0.0", interface = "enp4s3" },
+                files = {
+                    { path = "/mnt/sync/~ltjones/flights.txt", content = _U('flights_file_content'), action = nil }
+                },
+                commands = { "echo", "ip", "uname", "cat" }
+            }
+        },
+        TowerTop01 = {
+            x = -2357.06, y = 3251.38, z = 101.45,
+            machine = {
+                hostname = "towerflght01",
+                user = "cptwilliams",
+                version = "1.0.1-08-mil",
+                ip = { address = "10.10.200.10", subnet = "8", network = "10.0.0.0", interface = "enp4s3" },
+                files = {
+                    { path = "/mnt/sync/~ltjones/flights.txt", content = _U('flights_file_content'), action = nil }
+                },
+                commands = { "echo", "ip", "uname", "cat" }
+            }
+        },
+        TowerBackOffice01 = {
+            x = -2354.15, y = 3254.73, z = 92.9,
+            machine = {
+                hostname = "towerop01",
+                user = "admin",
+                version = "1.0.1-08-mil",
+                ip = { address = "10.10.300.127", subnet = "8", network = "10.0.0.0", interface = "enp4s3" },
+                commands = { "echo", "ip", "uname"}
+            }
+        },
+        TowerBackOffice02 = {
+            x = -2356.15, y = 3255.97, z = 92.9,
+            machine = {
+                hostname = "tower-test",
+                user = "dev",
+                version = "1.0.1-10-mil",
+                ip = { address = "10.10.300.128", subnet = "8", network = "10.0.0.0", interface = "enp4s3" },
+                commands = { "echo", "ip", "uname" }
+            }
+        },
+        TowerBackOfficeWeather = {
+            x = -2353.38, y = 3257.74, z = 92.9,
+            machine = {
+                hostname = "weathersrv",
+                user = "sync",
+                version = "1.0.0-02-mil",
+                ip = { address = "10.10.200.21", subnet = "8", network = "10.0.0.0", interface = "eth0" },
+                commands = { "echo", "ip", "uname" }
+            }
+        },
+    },
+}

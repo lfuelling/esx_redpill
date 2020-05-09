@@ -27,6 +27,8 @@ Locales['en'] = {
     ['intro_msg_text_fail'] = "I was unable to log in. Are you even in the correct place?",
     ['intro_msg_text_anon'] = "Anon doesn't work on me, n00b! ",
     ['intro_msg_text_anon_obv'] = "Hah, you think a blocked number works on me?\n",
+
+    ['flights_file_content'] = "| Pilot   | Machine | Time |\n| Smith   | Lazer   | 8:00 |\n| Collins | Lazer   | 8:00 |\n| Burke   | Besra   | 8:15 |\n| Parker  | Besra   | 8:15 |\n| Louis   | Besra   | 8:15 |",
     ['intro_file_content'] = "Good work!\nNow let's get to business. I need the hostname of the main machine of Lester Crest. " ..
             "We both know who I'm talking about.\n\nGo to his house, get the information, write it to my number.\nEasy, right?",
 
