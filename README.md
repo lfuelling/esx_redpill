@@ -1,4 +1,4 @@
-# ESX REDPILL
+# ESX REDPILL [![Latest Release](https://img.shields.io/github/v/release/lfuelling/esx_redpill?include_prereleases)](https://github.com/lfuelling/esx_redpill/releases)
 
 Hacking minigame(/mission/job) featuring proper terminals with some sort of UNIX(-like) stuff running on them.
 
