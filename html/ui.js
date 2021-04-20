@@ -5,7 +5,8 @@ $(function () {
             document.body.style.display = event.data.enable ? "block" : "none";
 
             if (event.data.enable) {
-                term = $('#screen').terminal(function (command, term) {
+                $('.menu-terminal').text(`${event.data.machine.user}@${event.data.machine.hostname} - Terminal`);
+                term = $('#terminal-content').terminal(function (command, term) {
                     if (command === "exit") {
                         $.post('http://esx_redpill/escape', JSON.stringify({}));
                     } else {
