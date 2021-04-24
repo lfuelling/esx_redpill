@@ -17,7 +17,8 @@ files {
     'html/ui.html',
     'html/ui.js',
     'html/ui.css',
-    'html/lib/jquery-3.5.1.min.js',
+    'html/img/linux.png',
+    'html/img/terminal.png',
     'html/lib/jquery.terminal.min.js',
     'html/lib/jquery.terminal.min.css'
 }

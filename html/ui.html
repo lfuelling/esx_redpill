@@ -6,8 +6,30 @@
 </head>
 <body>
 
-<div id="frame">
-    <div id="screen"></div>
+<div id="monitor">
+    <div class="inner">
+        <div class="inner-toolbar">
+            <div class="menu"></div>
+            <div class="divider"></div>
+            <div class="menu-terminal">Terminal</div>
+        </div>
+        <div class="inner-terminal">
+            <div class="terminal-header">
+                <div class="terminal-header-title">Terminal</div>
+                <div class="terminal-header-controls">
+                    <div class="dot min"></div>
+                    <div class="dot max"></div>
+                    <div class="dot close"></div>
+                </div>
+            </div>
+            <div id="terminal-content"></div>
+        </div>
+        <div class="desktop">
+            <div class="icon">
+                Terminal
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
