@@ -1,9 +1,10 @@
-fx_version 'bodacious'
+fx_version 'cerulean'
+
 game 'gta5'
 
 description 'ESX Hacking Mission/Job'
 
-version '0.0.5'
+version '0.0.9'
 
 dependency 'bob74_ipl'
 dependency 'es_extended'
@@ -26,22 +27,18 @@ files {
 client_scripts {
     '@es_extended/locale.lua',
     'client/functions.lua',
-    'locales/en.lua',
+    'locales/*.lua',
     'config.lua',
     'client/locations.lua',
     'client/commands.lua',
     'res.lua',
     'client/main.lua',
-    'client/missions/tutorial.lua',
-    'client/missions/mission1.lua',
-    'client/missions/mission2.lua',
-    'client/missions/mission3.lua',
-    'client/missions/mission4.lua',
+    'client/missions/*.lua',
 }
 
 server_scripts {
     '@es_extended/locale.lua',
-    'locales/en.lua',
+    'locales/*.lua',
     'config.lua',
     'res.lua',
     'server/main.lua'
